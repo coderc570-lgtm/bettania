@@ -1,0 +1,3 @@
+.secrets/*
+storage/db-data/*
+storage/redis-data/*

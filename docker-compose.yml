@@ -1,0 +1,100 @@
+services:
+  frontend:
+    image: britania-frontend:dev
+    container_name: frontend
+    build:
+      context: ./britania-frontend
+      dockerfile: Dockerfile
+    volumes:
+      - /app/node_modules
+      - ./britania-frontend:/home/node   # Mounting the Vue.js app directory
+    networks:
+      - app-network
+
+  backend:
+    image: britania-backend:dev
+    container_name: backend
+    build:
+        context: ./britania-backend
+        dockerfile: Dockerfile
+    restart: unless-stopped
+    tty: true
+    environment:
+        SERVICE_NAME: britania
+        SERVICE_TAGS: dev
+    working_dir: /var/www/html
+    volumes:
+      - ./britania-backend:/var/www/html  # Mounting the Laravel app directory
+    networks:
+            - app-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    ports:
+      - 8000:80
+      - 443:443
+    networks:
+      - app-network
+
+  db:
+      platform: linux/x86_64
+      image: mysql:5.7
+      container_name: database
+      restart: unless-stopped
+      tty: true
+      ports:
+            - 3306:3306
+      volumes:
+            - ./storage/db-data:/var/lib/mysql
+      environment:
+          MYSQL_DATABASE_FILE: /run/secrets/mysql_database
+          MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_pw
+          MYSQL_USER_FILE: /run/secrets/mysql_user
+          MYSQL_PASSWORD_FILE: /run/secrets/mysql_pw
+      secrets:
+          - mysql_database
+          - mysql_root_pw
+          - mysql_user
+          - mysql_pw
+      networks:
+          - app-network
+
+  phpmyadmin:
+      platform: linux/amd64
+      image: phpmyadmin:5
+      container_name: phpmyadmin
+      restart: unless-stopped
+      tty: true
+      depends_on:
+          - db
+      environment:
+            PMA_HOST: db
+            MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_pw
+      secrets:
+          - mysql_root_pw
+      ports:
+          - 8001:80
+      networks:
+          - app-network
+
+secrets:
+    mysql_database:
+        file: ./.secrets/mysql_database.txt
+    mysql_root_pw:
+        file: ./.secrets/mysql_root_pw.txt
+    mysql_user:
+        file: ./.secrets/mysql_user.txt
+    mysql_pw:
+        file: ./.secrets/mysql_pw.txt
+    # etherpad_apikey:
+    #     file: ./.secrets/etherpad_apikey.txt
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
