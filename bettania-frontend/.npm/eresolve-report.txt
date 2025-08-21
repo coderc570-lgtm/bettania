@@ -1,0 +1,81 @@
+# npm resolution error report
+
+2024-10-13T00:11:18.343Z
+
+While resolving: ticket-sales-frontend@0.1.0
+Found: vue@3.5.12
+node_modules/vue
+  vue@"^3.2.13" from the root project
+
+Could not resolve dependency:
+peer vue@"^2.5.0" from vue2-datepicker@3.11.1
+node_modules/vue2-datepicker
+  vue2-datepicker@"*" from the root project
+
+Fix the upstream dependency conflict, or retry
+this command with --force, or --legacy-peer-deps
+to accept an incorrect (and potentially broken) dependency resolution.
+
+Raw JSON explanation object:
+
+{
+  "code": "ERESOLVE",
+  "current": {
+    "name": "vue",
+    "version": "3.5.12",
+    "whileInstalling": {
+      "name": "ticket-sales-frontend",
+      "version": "0.1.0",
+      "path": "/home/node"
+    },
+    "location": "node_modules/vue",
+    "isWorkspace": false,
+    "dependents": [
+      {
+        "type": "prod",
+        "name": "vue",
+        "spec": "^3.2.13",
+        "from": {
+          "location": "/home/node"
+        }
+      }
+    ]
+  },
+  "currentEdge": {
+    "type": "prod",
+    "name": "vue",
+    "spec": "^3.2.13",
+    "from": {
+      "location": "/home/node"
+    }
+  },
+  "edge": {
+    "type": "peer",
+    "name": "vue",
+    "spec": "^2.5.0",
+    "error": "INVALID",
+    "from": {
+      "name": "vue2-datepicker",
+      "version": "3.11.1",
+      "whileInstalling": {
+        "name": "ticket-sales-frontend",
+        "version": "0.1.0",
+        "path": "/home/node"
+      },
+      "location": "node_modules/vue2-datepicker",
+      "isWorkspace": false,
+      "dependents": [
+        {
+          "type": "prod",
+          "name": "vue2-datepicker",
+          "spec": "*",
+          "from": {
+            "location": "/home/node"
+          }
+        }
+      ]
+    }
+  },
+  "strictPeerDeps": false,
+  "force": false
+}

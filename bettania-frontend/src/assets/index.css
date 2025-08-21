@@ -1,0 +1,8 @@
+/* src/assets/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bg-transparent-blur {
+    background-color: rgba(255, 255, 255, 0.3); /* Adjust the transparency here */
+  }
