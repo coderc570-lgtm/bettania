@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { axiosInstance } from '@/axios/axios'; // Adjust the import path as needed
+import { axiosInstance } from '@/axios/axios';
 import router from '@/router'
 
 export const useAuthStore = defineStore('auth', {
