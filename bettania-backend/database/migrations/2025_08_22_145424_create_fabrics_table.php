@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('media', function (Blueprint $table) {
+        Schema::create('fabrics', function (Blueprint $table) {
             $table->id();
-            $table->morphs('image');
-            $table->string('hash');
-            $table->string('path');
-            $table->string('format');
-            $table->string('mime_type');
-            $table->integer('size');
+            $table->string('name')->nullable();
+            $table->decimal('price', 10, 2)->nullable();
+            $table->text('filepath')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('media');
+        Schema::dropIfExists('fabrics');
     }
 };
