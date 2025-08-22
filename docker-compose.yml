@@ -1,30 +1,30 @@
 services:
   frontend:
-    image: britania-frontend:dev
+    image: bettania-frontend:dev
     container_name: frontend
     build:
-      context: ./britania-frontend
+      context: ./bettania-frontend
       dockerfile: Dockerfile
     volumes:
       - /app/node_modules
-      - ./britania-frontend:/home/node   # Mounting the Vue.js app directory
+      - ./bettania-frontend:/home/node   # Mounting the Vue.js app directory
     networks:
       - app-network
 
   backend:
-    image: britania-backend:dev
+    image: bettania-backend:dev
     container_name: backend
     build:
-        context: ./britania-backend
+        context: ./bettania-backend
         dockerfile: Dockerfile
     restart: unless-stopped
     tty: true
     environment:
-        SERVICE_NAME: britania
+        SERVICE_NAME: bettania
         SERVICE_TAGS: dev
     working_dir: /var/www/html
     volumes:
-      - ./britania-backend:/var/www/html  # Mounting the Laravel app directory
+      - ./bettania-backend:/var/www/html  # Mounting the Laravel app directory
     networks:
             - app-network
 
