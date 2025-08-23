@@ -1402,4 +1402,10 @@ trait QueryGenerator
         
         return $abbreviation;
     }
+
+    private function getCartToken()
+    {
+        return request()->cookie('cart_token') 
+            ?? tap(Str::uuid(), fn($uuid) => cookie()->queue('cart_token', $uuid, 60*24*30)); 
+    }
 }
