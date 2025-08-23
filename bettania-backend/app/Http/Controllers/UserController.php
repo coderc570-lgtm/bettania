@@ -32,7 +32,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $userData = $request->only(['first_name', 'last_name', 'email', 'password']);
+        $userData = $request->only(['first_name', 'last_name', 'email', 'password', 'role']);
         $user = $this->userService->create($userData);
     
         if (isset($user['errors'])) {
