@@ -29,6 +29,7 @@ Route::prefix('v1')->group(function () {
 
     Route::get('/guest-cart', [CartController::class, 'guestIndex']);
     Route::post('/guest-add-cart', [CartController::class, 'store']);
+    Route::post('/request-login', [AuthenticationController::class, 'requestLoginCode']);
 
     /**
      * Protected routes (require Sanctum)

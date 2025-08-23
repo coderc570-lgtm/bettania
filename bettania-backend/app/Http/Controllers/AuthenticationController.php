@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\LoginVerificationMail;
+use App\Models\User;
+use App\Models\VerificationCode;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
 use App\Modules\Auth\AuthServiceInterface;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class AuthenticationController extends Controller
 {
@@ -128,5 +133,35 @@ class AuthenticationController extends Controller
         $request->session()->regenerateToken();
 
         return response()->json(['message' => 'User logged out successfully'], 200);
+    }
+
+    public function requestLoginCode(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        DB::beginTransaction();
+        
+        try {
+
+            $user = User::findOrFail($request->input('email'));
+
+            $code = rand(100000, 999999);
+            
+            VerificationCode::create([
+                'user_id' => $user->id,
+                'code' => $code,
+                'expires_at' => now()->addMinutes(10),
+            ]);
+        
+            Mail::to($user->email)->send(new LoginVerificationMail($code, $user));
+            DB::commit();
+            return response()->json(['message' => 'Login code sent to your email'], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['error' => 'Failed to process login code request'], 500);
+        }
+    
     }
 }
