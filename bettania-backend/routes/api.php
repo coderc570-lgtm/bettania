@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Str;
 
 /*
@@ -25,6 +26,10 @@ Route::prefix('v1')->group(function () {
         Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
         Route::get('/check', [AuthenticationController::class, 'checkAuth']);
     });
+
+    Route::get('/guest-cart', [CartController::class, 'guestIndex']);
+    Route::post('/guest-add-cart', [CartController::class, 'store']);
+    Route::post('/request-login', [AuthenticationController::class, 'requestLoginCode']);
 
     /**
      * Protected routes (require Sanctum)
