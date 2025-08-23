@@ -1,31 +1,32 @@
 <template>
   <div>
-    <label :for="name" class="block mb-2 text-sm font-medium text-gray-900">{{ label }}</label>
+    <label :for="id" class="block text-sm font-medium text-gray-700">
+      {{ label }}
+    </label>
     <input
-      :type="type"
+      :id="id"
       :name="name"
-      :id="name"
-      :class="`bg-gray-50 border border-gray-300 rounded-md mb-2 focus:outline-none focus:ring-2 focus:ring-primary-500 block p-1.5 ${customClass}`"
+      :type="type"
       :placeholder="placeholder"
-      v-model="internalValue"
-      required
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
+      class="mt-1 block w-full
+      border border-gray-300
+      rounded-md shadow-sm
+      px-4 py-2 focus:ring-black
+      focus:border-black"
+      :required="required"
     />
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'BaseInput',
+<script>
+export default {
+  name: 'Input',
   props: {
-    modelValue: {
+    id: {
       type: String,
-      default: ''
-    },
-    type: {
-      type: String,
-      default: 'text'
+      required: true
     },
     name: {
       type: String,
@@ -39,25 +40,19 @@ export default defineComponent({
       type: String,
       default: ''
     },
-    customClass: {
+    type: {
+      type: String,
+      default: 'text'
+    },
+    modelValue: {
       type: String,
       default: ''
     },
-  },
-  data() {
-    return {
-      internalValue: this.modelValue, // Initialize internal value with modelValue
-    };
-  },
-  watch: {
-    // Watch for changes in internalValue to emit updates
-    internalValue(newValue) {
-      this.$emit('update:modelValue', newValue);
-    },
-    // Watch for changes in modelValue and update internalValue
-    modelValue(newValue) {
-      this.internalValue = newValue;
+    required: {
+      type: Boolean,
+      default: false
     },
   },
-});
+  emits: ['update:modelValue'],
+};
 </script>

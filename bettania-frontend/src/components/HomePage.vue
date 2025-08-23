@@ -18,8 +18,6 @@ import Gallery from '@/components/Home/Gallery.vue';
 import About from '@/components/Home/About.vue';
 import Explore from '@/components/Home/Explore.vue';
 
-
-
 export default defineComponent({
   name: 'HomePage',
   components: {

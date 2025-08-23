@@ -12,6 +12,7 @@
     "@fortawesome/fontawesome-free": "^7.0.0",
     "@kyvg/vue3-notification": "^3.2.1",
     "@vueup/vue-quill": "^1.2.0",
+    "aos": "^2.3.4",
     "axios": "^1.7.2",
     "core-js": "^3.8.3",
     "dayjs": "^1.11.13",

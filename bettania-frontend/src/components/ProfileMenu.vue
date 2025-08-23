@@ -16,30 +16,6 @@
              >
              View profile
             </router-link>
-            <router-link
-             :to="{ name: 'home' }"
-             class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-             >
-             Manage organizer
-            </router-link>
-            <router-link
-             :to="{ name: 'home' }"
-             class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-             >
-             Manage event
-            </router-link>
-            <router-link
-             :to="{ name: 'home' }"
-             class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-             >
-             My save events
-            </router-link>
-            <router-link
-             :to="{ name: 'home' }"
-             class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-             >
-             Following organizer
-            </router-link>
             <div
              class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
              @click="logout"
