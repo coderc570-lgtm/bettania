@@ -26,47 +26,34 @@ class AuthenticationController extends Controller
      */
     public function authenticate(Request $request)
     {
-        try {
-            $credentials = $request->validate([
-                'email' => ['required', 'email'],
-                'password' => ['required', 'min:6'],
-            ]);
-        } catch (ValidationException $e) {
-            return response()->json(['error' => 'invalid_credentials'], 401);
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'code'    => 'required|string',
+        ]);
+    
+        $verification = VerificationCode::where('user_id', $request->user_id)
+            ->where('code', $request->code)
+            ->where('is_used', false)
+            ->where('expires_at', '>', now())
+            ->first();
+    
+        if (! $verification) {
+            return response()->json([
+                'message' => 'Invalid or expired verification code.',
+            ], 422);
         }
     
-        $exposeAttr = [
-            'id',
-            'first_name',
-            'last_name',
-            'email',
-        ];
+        $verification->update(['is_used' => true]);
     
-        // Initialize response
-        $response = [
-            'isLoggedIn' => false,
-            'user' => null,
-            'session' => (object)[
-                'lifetime' => intval(env('SESSION_LIFETIME', 120))
-            ]
-        ];
+        $user = User::findOrFail($request->user_id);
     
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            $response['isLoggedIn'] = true;
-            $response['user'] = $request->user()->only($exposeAttr);
+        $token = $user->createToken('auth_token')->plainTextToken;
     
-            // Generate token
-            $token = $request->user()->createToken('authToken', ['*'], now()->addDays(7))->plainTextToken;
-    
-            // Set token in HTTP-only cookie
-            $cookie = cookie('authToken', $token, 60 * 24 * 7, null, null, true, true);
-    
-            // Return response with cookie
-            return response()->json(['message' => 'User successfully logged in', 'data' => $response])->cookie($cookie);
-        } else {
-            return response()->json(['error' => 'Invalid credentials'], 401);
-        }
+        return response()->json([
+            'message' => 'Login successful.',
+            'user'    => $user,
+            'token'   => $token,
+        ]);
     }
 
     public function checkAuth(Request $request)
