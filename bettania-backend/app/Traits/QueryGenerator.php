@@ -1402,4 +1402,6 @@ trait QueryGenerator
         
         return $abbreviation;
     }
+
+
 }
