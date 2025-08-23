@@ -7,6 +7,7 @@ import router from '@/router';
 import axiosPlugin from '@/axios/axios';
 import notifications from '@kyvg/vue3-notification';
 import { useAuthStore } from '@/store/authLogin';
+import '@fortawesome/fontawesome-free/css/all.css';
 
 const app = createApp(App);
 
