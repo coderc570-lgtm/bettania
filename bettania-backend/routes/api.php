@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Str;
 
 /*
@@ -18,6 +19,12 @@ Route::prefix('v1')->group(function () {
     /**
      * Public routes (no auth middleware)
      */
+
+    Route::prefix('sign-up')->group(function () {
+        Route::post('/', [UserController::class, 'store']);
+        Route::patch('/update/{id}', [UserController::class, 'update']);
+    });
+
     Route::prefix('auth')->group(function () {
         Route::post('/register', [AuthenticationController::class, 'register']);
         Route::post('/login', [AuthenticationController::class, 'login']);
