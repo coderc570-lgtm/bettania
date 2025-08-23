@@ -132,7 +132,7 @@ class AuthenticationController extends Controller
         
         try {
 
-            $user = User::findOrFail($request->input('email'));
+            $user = User::where('email', $request->email)->firstOrFail();
 
             $code = rand(100000, 999999);
             
@@ -147,7 +147,7 @@ class AuthenticationController extends Controller
             return response()->json(['message' => 'Login code sent to your email'], 200);
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['error' => 'Failed to process login code request'], 500);
+            return response()->json(['error' => 'Failed to process login code request', 'error_message' => $e->getMessage()], 500);
         }
     
     }
