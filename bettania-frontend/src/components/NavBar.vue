@@ -23,20 +23,36 @@
     <div
       class="flex md:order-2
       space-x-3 md:space-x-0
-      rtl:space-x-reverse"
+      rtl:space-x-reverse gap-2"
     >
       <router-link
         v-if="!isLoggedIn"
         :to="{ name: 'login' }"
-        class="text-white bg-primary-600
-        hover:bg-primary-700 focus:ring-4
-        focus:outline-none focus:ring-primary-300
-        font-medium rounded-lg
-        text-sm px-4 py-2 text-center
-        dark:bg-primary-600 dark:hover:bg-primary-700
-        dark:focus:ring-primary-800"
+        class="flex items-center justify-center w-10 h-10
+              text-white bg-primary-600 rounded-full
+              hover:bg-primary-700 focus:outline-none
+              focus:ring-4 focus:ring-primary-300
+              dark:bg-primary-600 dark:hover:bg-primary-700
+              dark:focus:ring-primary-800"
+        aria-label="Sign In"
+        title="Sign In"
       >
-        Sign In
+        <i class="fas fa-user"></i>
+      </router-link>
+
+      <router-link
+        v-if="!isLoggedIn"
+        :to="{ name: 'cart' }"
+        class="flex items-center justify-center w-10 h-10
+              text-white bg-primary-600 rounded-full
+              hover:bg-primary-700 focus:outline-none
+              focus:ring-4 focus:ring-primary-300
+              dark:bg-primary-600 dark:hover:bg-primary-700
+              dark:focus:ring-primary-800"
+        aria-label="Cart"
+        title="Cart"
+      >
+        <i class="fas fa-shopping-cart"></i>
       </router-link>
       <ProfileMenu v-else/>
         <button
@@ -145,7 +161,7 @@
   </nav>
 </template>
   
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue';
 import { useAuthStore } from '@/store/authLogin';
 import ProfileMenu from '@/components/ProfileMenu.vue';

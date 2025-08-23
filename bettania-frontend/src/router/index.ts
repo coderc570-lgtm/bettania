@@ -7,6 +7,7 @@ import ProfileSettings from '@/components/ProfileSettings.vue';
 import CreateEvent from '@/components/CreateEvent.vue';
 import Contact from '@/components/Contact.vue';
 import CustomSuit from '@/components/CustomSuit.vue';
+import Cart from '@/components/Cart.vue';
 
 const routes = [
   {
@@ -50,6 +51,12 @@ const routes = [
     path: '/custom-suit',
     component: CustomSuit, 
     name: 'custom-suit',
+  },
+
+  { 
+    path: '/cart',
+    component: Cart, 
+    name: 'cart',
   },
 ]
 

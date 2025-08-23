@@ -1,5 +1,5 @@
 <template>
-    <div class="mx-auto min-h-screen rounded-lg shadow-md p-5 w-1/2">
+    <div class="min-h-auto bg-white flex flex-col px-16 md:px-24 py-12">
         <ProfilePicture />
         <ProfileInfo />
     </div>
