@@ -129,10 +129,12 @@ class CartRepository
     {
         DB::beginTransaction();
         try {
-            $data = $this->model::create([
-                'user_id' => Auth::id() ?? null,
-                'token' => $this->getCartToken(),
-            ]);
+            $data = $this->model::firstOrCreate(
+                [
+                    'user_id' => Auth::id() ?? null,
+                    'token'   => $this->getCartToken(),
+                ]
+            );
 
             $data->cartItems()->createMany($payload['cart_items'] ?? []);
 
@@ -185,4 +187,10 @@ class CartRepository
 //    {
 //        // override parent method here;
 //    }
+
+    private function getCartToken()
+    {
+        return request()->cookie('cart_token') 
+            ?? tap(Str::uuid(), fn($uuid) => cookie()->queue('cart_token', $uuid, 60*24*30)); 
+    }
 }
