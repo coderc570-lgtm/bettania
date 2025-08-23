@@ -144,7 +144,7 @@ class AuthenticationController extends Controller
         
             Mail::to($user->email)->send(new LoginVerificationMail($code, $user));
             DB::commit();
-            return response()->json(['message' => 'Login code sent to your email'], 200);
+            return response()->json(['message' => 'Login code sent to your email', 'user_id' => $user->id], 200);
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['error' => 'Failed to process login code request', 'error_message' => $e->getMessage()], 500);
