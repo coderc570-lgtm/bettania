@@ -17,7 +17,11 @@ class Store extends FormRequest
 
     public function rules(): array
     {
-        $additional_rules = [];
+        $additional_rules = [
+            'name' => ['required'],
+            'price' => ['required', 'numeric'],
+            'filepath' => ['nullable', 'string'],
+        ];
 
         return array_merge($this->payloadRules(), $additional_rules);
     }

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\TrouserFabric;
+namespace App\Http\Requests\Lapel;
 
 use App\Traits\PayloadRuleTrait;
 use Illuminate\Foundation\Http\FormRequest;
 use Bouncer;
 
-class Update extends FormRequest
+class Show extends FormRequest
 {
     use PayloadRuleTrait;
 
@@ -17,11 +17,7 @@ class Update extends FormRequest
 
     public function rules(): array
     {
-        $additional_rules = [
-            'name' => ['required'],
-            'price' => ['required', 'numeric'],
-            'filepath' => ['nullable', 'string'],
-        ];
+        $additional_rules = [];
 
         return array_merge($this->payloadRules(), $additional_rules);
     }
