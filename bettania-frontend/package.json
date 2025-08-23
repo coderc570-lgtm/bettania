@@ -9,6 +9,7 @@
     "dev": "vue-cli-service serve"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.0.0",
     "@kyvg/vue3-notification": "^3.2.1",
     "@vueup/vue-quill": "^1.2.0",
     "axios": "^1.7.2",
