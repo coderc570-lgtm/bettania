@@ -188,6 +188,16 @@ class CartRepository
 //        // override parent method here;
 //    }
 
+    public function guestIndex($payload, $selected_relation_columns_only = [], $headers = []): array
+    {
+        $payload['search'][] = [
+            'key' => 'carts.token',
+            's' => $this->getCartToken(),
+        ];
+
+        return $this->index($payload, $selected_relation_columns_only, $headers);
+    }
+
     private function getCartToken()
     {
         return request()->cookie('cart_token') 

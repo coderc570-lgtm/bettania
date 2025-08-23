@@ -86,4 +86,11 @@ class CartController extends Controller
         $data = $this->CartRepository->restore($id, $this->selected_relation_columns_only);
         return $this->CartRepository->getJsonResponse($data);
     }
+
+    public function guestIndex(Index $request): JsonResponse
+    {
+        $payload = $request->validated();
+        $data = $this->CartRepository->guestIndex($payload, $this->selected_relation_columns_only, $this->headers);
+        return $this->CartRepository->getJsonResponse($data);
+    }
 }
