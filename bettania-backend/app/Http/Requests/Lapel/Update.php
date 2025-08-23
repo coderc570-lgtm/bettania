@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\TrouserFabric;
+namespace App\Http\Requests\Lapel;
 
 use App\Traits\PayloadRuleTrait;
 use Illuminate\Foundation\Http\FormRequest;
