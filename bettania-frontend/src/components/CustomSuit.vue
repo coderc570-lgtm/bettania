@@ -5,29 +5,63 @@
         space-x-8
         justify-center w-full"
     >
-    <div class="w-1/2 bg-gray-100 rounded-lg overflow-hidden relative">
-        <!-- <img 
-          v-if="selectedFabricId" 
-          :src="fabric.find(f => f.id === selectedFabricId)?.image" 
-          class="w-full h-full object-cover"
-        /> -->
-        <img 
-          v-if="selectedStyleId" 
-          :src="filteredSuitStyles.find(s => s.id === selectedStyleId)?.image" 
-          class=" w-full h-full object-scale-down"
-        />
-        <!-- <img 
-          v-if="selectedButtonsId" 
-          :src="buttons.find(b => b.id === selectedButtonsId)?.image" 
-          class="absolute top-0 left-0 w-full h-full object-scale-down"
-        /> -->
+        <div flex flex-col class="bg-gray-50 rounded-lg shadow-md border border-solid">
+            <div class="overflow-hidden relative">
 
-        <img 
-            v-if="selectedStyleId"
-            :src="sleeve.find(s => s.id === filteredSuitStyles.find(style => style.id === selectedStyleId)?.sleeve_id)?.image"
-            class="absolute top-0 left-0 w-full h-full object-scale-down"
-        />
-      </div>
+                <!-- INNER LINING (always under) -->
+                <img 
+                    v-if="selectedLiningId"
+                    :src="lining.find(s => s.id === selectedLiningId)?.upper"
+                    class="top-0 left-0 w-full h-full object-scale-down z-0"
+                />
+    
+                <!-- LOWER INNER LINING (always under) -->
+                <img 
+                    v-if="selectedLiningId"
+                    :src="lining.find(s => s.id === selectedLiningId)?.lower"
+                    class="absolute top-0 left-0 w-full h-full object-scale-down z-0"
+                />
+            
+                <!-- STYLE -->
+                <img 
+                    v-if="selectedStyleId" 
+                    :src="filteredSuitStyles.find(s => s.id === selectedStyleId)?.image" 
+                    class="absolute top-0 left-0 w-full h-full object-scale-down z-10"
+                />
+            
+                <!-- SLEEVE -->
+                <img 
+                    v-if="selectedStyleId"
+                    :src="sleeve.find(s => s.id === filteredSuitStyles.find(style => style.id === selectedStyleId)?.sleeve_id)?.image"
+                    class="absolute top-0 left-0 w-full h-full object-scale-down z-10"
+                />
+            
+                <!-- NECK LINING -->
+                <img 
+                    v-if="selectedStyleId"
+                    :src="sleeve.find(s => s.id === filteredSuitStyles.find(style => style.id === selectedStyleId)?.sleeve_id)?.upper_lining"
+                    class="absolute top-0 left-0 w-full h-full object-scale-down z-10"
+                />
+            
+                <!-- BOTTOM -->
+                <img 
+                    v-if="selectedStyleId"
+                    :src="suitBottom.find(s => s.id === filteredSuitStyles.find(style => style.id === selectedStyleId)?.bottom_id)?.image"
+                    class="absolute top-0 left-0 w-full h-full object-scale-down z-10"
+                />
+            
+            </div>
+    
+            <!-- TROUSERS (below top) -->
+            <div class="relative w-full mt-2">
+                <img 
+                    v-if="selectedTrousersId" 
+                    :src="trousers.find(s => s.id === selectedTrousersId)?.image" 
+                    class="w-full h-full object-scale-down"
+                />
+            </div>
+        </div>
+    
 
         <div class="flex flex-col px-10">
             <div>
@@ -164,11 +198,36 @@ const sleeve = [
         id: 1,
         title: 'Oberon Sleeve',
         image: getImage('lining-sleeves.webp'),
+        upper_lining: getImage('lining-back-upper.webp') 
     },
     {
         id: 2,
         title: 'Sicilian Sleeve',
         image: getImage('sicilian-grey-lining-sleeves.webp'),
+        upper_lining: getImage('sicilian-grey-lining-back-upper.webp') 
+    }
+]
+
+const suitBottom = [
+    {
+        id: 1,
+        name: 'Oberon Single Breast',
+        image: getImage('bottom-long-open.webp')
+    },
+    {
+        id: 2,
+        name: 'Oberon Double Breast',
+        image: getImage('bottom-double-breasted-long.webp')
+    },
+    {
+        id: 3,
+        name: 'Sicilian Single Breast',
+        image: getImage('sicilian-grey-bottom-single-breasted-long.webp')
+    },
+    {
+        id: 4,
+        name: 'Sicilian Double Breast',
+        image: getImage('sicilian-grey-bottom-double-breasted-long.webp')
     }
 ]
 
@@ -179,6 +238,7 @@ const suitStyle = [
         fabric_id: 1,
         notch_id: 1,
         sleeve_id: 1,
+        bottom_id: 1,
         image: getImage('neck-lapel-notch-1btn.webp'),
     },
     {
@@ -187,6 +247,7 @@ const suitStyle = [
         fabric_id: 1,
         notch_id: 1,
         sleeve_id: 1,
+        bottom_id: 1,
         image: getImage('neck-lapel-notch-2btn.webp'),
     },
     {
@@ -195,6 +256,7 @@ const suitStyle = [
         fabric_id: 1,
         notch_id: 1,
         sleeve_id: 1,
+        bottom_id: 2,
         image: getImage('neck-lapel-notch-double-breasted-4btn.webp'),
     },
     {
@@ -203,6 +265,7 @@ const suitStyle = [
         fabric_id: 1,
         notch_id: 1,
         sleeve_id: 1,
+        bottom_id: 2,
         image: getImage('neck-lapel-notch-double-breasted-6btn.webp'),
     },
     {
@@ -211,6 +274,7 @@ const suitStyle = [
         fabric_id: 2,
         notch_id: 1,
         sleeve_id: 2,
+        bottom_id: 3,
         image: getImage('sicilian-grey-neck-lapel-single-breasted-notch-1btn.webp'),
     },
     {
@@ -219,6 +283,7 @@ const suitStyle = [
         fabric_id: 2,
         notch_id: 1,
         sleeve_id: 2,
+        bottom_id: 3,
         image: getImage('sicilian-grey-neck-lapel-single-breasted-notch-2btn.webp'),
     },
     {
@@ -227,6 +292,7 @@ const suitStyle = [
         fabric_id: 2,
         notch_id: 1,
         sleeve_id: 2,
+        bottom_id: 4,
         image: getImage('sicilian-grey-neck-lapel-double-breasted-notch-4btn.webp'),
     },
     {
@@ -235,6 +301,7 @@ const suitStyle = [
         fabric_id: 2,
         notch_id: 1,
         sleeve_id: 2,
+        bottom_id: 4,
         image: getImage('sicilian-grey-neck-lapel-double-breasted-notch-6btn.webp'),
     },
     {
@@ -243,6 +310,7 @@ const suitStyle = [
         fabric_id: 1,
         notch_id: 2,
         sleeve_id: 1,
+        bottom_id: 1,
         image: getImage('neck-lapel-peak-1btn.webp'),
     },
     {
@@ -251,6 +319,7 @@ const suitStyle = [
         fabric_id: 1,
         notch_id: 2,
         sleeve_id: 1,
+        bottom_id: 1,
         image: getImage('neck-lapel-peak-2btn.webp'),
     },
     {
@@ -258,7 +327,8 @@ const suitStyle = [
         title: 'Double-breasted 4 buttons',
         fabric_id: 1,
         notch_id: 2, 
-        sleeve_id: 1,       
+        sleeve_id: 1, 
+        bottom_id: 2,
         image: getImage('neck-lapel-peak-double-breasted-4btn.webp'),
     },
     {
@@ -267,6 +337,7 @@ const suitStyle = [
         fabric_id: 1,
         notch_id: 2,
         sleeve_id: 1,
+        bottom_id: 2,
         image: getImage('neck-lapel-peak-double-breasted-6btn.webp'),
     },
     {
@@ -275,6 +346,7 @@ const suitStyle = [
         fabric_id: 2,
         notch_id: 2,
         sleeve_id: 2,
+        bottom_id: 3,
         image: getImage('sicilian-grey-neck-lapel-single-breasted-peak-1btn.webp'),
     },
     {
@@ -283,6 +355,7 @@ const suitStyle = [
         fabric_id: 2,
         notch_id: 2,
         sleeve_id: 2,
+        bottom_id: 3,
         image: getImage('sicilian-grey-neck-lapel-single-breasted-peak-2btn.webp'),
     },
     {
@@ -291,6 +364,7 @@ const suitStyle = [
         fabric_id: 2,
         notch_id: 2,
         sleeve_id: 2,
+        bottom_id: 4,
         image: getImage('sicilian-grey-neck-lapel-double-breasted-peak-4btn.webp'),
     },
     {
@@ -298,7 +372,8 @@ const suitStyle = [
         title: 'Double-breasted 6 buttons',
         fabric_id: 2,
         notch_id: 2, 
-        sleeve_id: 2,       
+        sleeve_id: 2, 
+        bottom_id: 4,
         image: getImage('sicilian-grey-neck-lapel-double-breasted-peak-6btn.webp'),
     },
 ]
@@ -337,16 +412,22 @@ const lining = [
         id: 1,
         title: 'Wall Street-Polyester',
         image: getImage('lining-wall-street-thumbnail.jpg'),
+        upper: getImage('lining-back-upper-alt-wall-street.webp'),
+        lower: getImage('lining-back-lower-berck-wall-street.webp')
     },
     {
         id: 2,
         title: 'Berck-Polyester',
         image: getImage('lining-berck-thumbnail.jpg'),
+        upper: getImage('lining-back-upper-alt-berck.webp'),
+        lower: getImage('lining-back-lower-berck.webp')
     },
     {
         id: 3,
         title: 'Anoniz-Polyester',
         image: getImage('lining-inoniz-thumbnail.jpg'),
+        upper: getImage('lining-back-upper-alt-inoniz.webp'),
+        lower: getImage('lining-back-lower-berck-inoniz.webp')
     }
 ]
 
@@ -384,8 +465,10 @@ function selectFabric(id: number) {
   selectedLapelId.value = 1
   if(selectedFabricId.value === 1) {
     selectedStyleId.value = 1
+    selectedTrousersId.value = 1
   } else {
     selectedStyleId.value = 5
+    selectedTrousersId.value = 2
   }
 }
 
