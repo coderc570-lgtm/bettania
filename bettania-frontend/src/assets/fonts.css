@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'Plantagenet Cherokee';
+  src: url('./fonts/plantagenet-cherokee.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Avenir Next';
+  src: url('./fonts/avenir-next.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Beautiful Heart';
+  src: url('./fonts/beautiful-heart.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}

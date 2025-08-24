@@ -12,44 +12,19 @@ module.exports = {
         //Text
         'dark-gray': '#212121',
         'medium-teal': '#26a69a',
-        'rose': '#ff5757'
+        'rose': '#ff5757',
+
+        'stone-gray': '#d7d7cf',
+        'pale-peach': '#eeded1',
+        'soft-gray': '#d3cec7',
+        'deep-plum': '#21171c',
+
+        'l-deep-plum': '#3a2732'
       }
     },
     fontFamily: {
-      'body': [
-        'Inter', 
-        'ui-sans-serif', 
-        'system-ui', 
-        '-apple-system', 
-        'system-ui', 
-        'Segoe UI', 
-        'Roboto', 
-        'Helvetica Neue', 
-        'Arial', 
-        'Noto Sans', 
-        'sans-serif', 
-        'Apple Color Emoji', 
-        'Segoe UI Emoji', 
-        'Segoe UI Symbol', 
-        'Noto Color Emoji'
-      ],
-        'sans': [
-          'Inter', 
-          'ui-sans-serif', 
-          'system-ui', 
-          '-apple-system', 
-          'system-ui', 
-          'Segoe UI', 
-          'Roboto', 
-          'Helvetica Neue', 
-          'Arial', 
-          'Noto Sans', 
-          'sans-serif', 
-          'Apple Color Emoji', 
-          'Segoe UI Emoji', 
-          'Segoe UI Symbol', 
-          'Noto Color Emoji'
-        ]
+      title: ['"Plantagenet Cherokee"', 'serif'],
+      text: ['"Avenir Next"', 'sans-serif'],
     }
   },
   plugins: [],
