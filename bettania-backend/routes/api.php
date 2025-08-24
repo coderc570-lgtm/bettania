@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\TempFileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Str;
 
@@ -98,5 +99,9 @@ Route::prefix('v1')->group(function () {
         }
 
         // Custom routes go here - add them manually as needed
+
+        // FILE UPLOADS
+        Route::post('uploads/temp-file', [TempFileController::class, 'upload']);
+        Route::post('uploads/file', [TempFileController::class, 'uploadFile']);
     });
 });
