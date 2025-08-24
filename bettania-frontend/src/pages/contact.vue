@@ -38,7 +38,7 @@
       <div>
         <button
           type="submit"
-          class="bg-black
+          class="bg-deep-plum
           text-white
           px-12 py-3
           rounded

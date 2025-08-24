@@ -10,6 +10,8 @@ import { useAuthStore } from '@/store/authLogin';
 import '@fortawesome/fontawesome-free/css/all.css';
 import AOS from 'aos'
 import 'aos/dist/aos.css'
+import 'remixicon/fonts/remixicon.css'
+import './assets/fonts.css';
 
 const app = createApp(App);
 

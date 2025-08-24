@@ -1,8 +1,8 @@
 <template>
-  <footer class="bg-white text-black border-t border-gray-200">
+  <footer class="bg-deep-plum text-white">
     <div class="max-w-screen-xl mx-auto py-12 px-4 grid grid-cols-1 md:grid-cols-3 gap-8 items-start text-sm">
       <div class="flex justify-center md:justify-start">
-        <img src="@/assets/images/bettania-logo.png" alt="Bettania Logo" class="h-24 md:h-32 w-auto object-contain" />
+        <img src="@/assets/images/bettania-logo-white.png" alt="Bettania Logo" class="h-24 md:h-32 w-auto object-contain" />
       </div>
 
       <div class="text-center">

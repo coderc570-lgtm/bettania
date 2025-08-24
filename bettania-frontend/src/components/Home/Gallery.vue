@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-white flex flex-col px-16 md:px-24 py-12">
+  <section class="bg-stone-gray flex flex-col px-16 md:px-24 py-12">
     <h2 class="text-2xl font-semibold mb-8" data-aos="fade-up">GALLERY</h2>
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">

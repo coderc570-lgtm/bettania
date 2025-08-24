@@ -1,8 +1,7 @@
 <template>
   <nav
-    class="sticky bg-light-gray
-    w-full z-20 top-0 start-0
-    border-b border-gray-200"
+    class="sticky bg-soft-gray
+    w-full z-20 top-0 start-0"
   >
     <div
       class="max-w-screen-xl
@@ -23,36 +22,49 @@
     <div
       class="flex md:order-2
       space-x-3 md:space-x-0
-      rtl:space-x-reverse gap-2"
+      rtl:space-x-reverse gap-2
+      hover:text-black"
     >
       <router-link
         v-if="!isLoggedIn"
         :to="{ name: 'login' }"
-        class="flex items-center justify-center w-10 h-10
-              text-white bg-primary-600 rounded-full
-              hover:bg-primary-700 focus:outline-none
-              focus:ring-4 focus:ring-primary-300
-              dark:bg-primary-600 dark:hover:bg-primary-700
-              dark:focus:ring-primary-800"
+        class="flex size-10
+          items-center
+          justify-center
+          text-white
+          bg-deep-plum
+          rounded-full
+          hover:bg-pale-peach
+          focus:outline-none
+          focus:ring-4
+          dark:bg-deep-plum
+          dark:hover:bg-pale-peach
+          dark:focus:ring-pale-peach"
         aria-label="Sign In"
         title="Sign In"
       >
-        <i class="fas fa-user"></i>
+        <i class="fas fa-user hover:text-black"></i>
       </router-link>
 
       <router-link
         v-if="!isLoggedIn"
         :to="{ name: 'cart' }"
-        class="flex items-center justify-center w-10 h-10
-              text-white bg-primary-600 rounded-full
-              hover:bg-primary-700 focus:outline-none
-              focus:ring-4 focus:ring-primary-300
-              dark:bg-primary-600 dark:hover:bg-primary-700
-              dark:focus:ring-primary-800"
+        class="flex size-10
+          items-center
+          justify-center
+          text-white
+          bg-deep-plum
+          rounded-full
+          hover:bg-pale-peach
+          focus:outline-none
+          focus:ring-4
+          dark:bg-deep-plum
+          dark:hover:bg-pale-peach
+          dark:focus:ring-pale-peach"
         aria-label="Cart"
         title="Cart"
       >
-        <i class="fas fa-shopping-cart"></i>
+        <i class="fas fa-shopping-cart hover:text-black"></i>
       </router-link>
       <ProfileMenu v-else/>
         <button
@@ -102,7 +114,7 @@
             class="flex flex-col
             p-4 md:p-0 mt-4 font-medium
             border border-gray-100
-            rounded-lg bg-light-gray
+            rounded-lg bg-soft-gray
             md:space-x-8
             rtl:space-x-reverse
             md:flex-row md:mt-0
@@ -164,7 +176,7 @@
 <script>
 import { defineComponent } from 'vue';
 import { useAuthStore } from '@/store/authLogin';
-import ProfileMenu from '@/components/ProfileMenu.vue';
+import ProfileMenu from '@/pages/User/profile-menu.vue';
 import logo from '@/assets/images/bettania-logo.png';
   
 export default defineComponent({

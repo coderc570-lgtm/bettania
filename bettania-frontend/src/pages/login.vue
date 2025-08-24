@@ -3,16 +3,16 @@
     <!-- Left Column -->
     <div class="hidden md:flex w-full md:w-1/2 items-center justify-center px-6 py-12 bg-gray-100">
         <div class="flex flex-col items-center text-9xl font-semibold space-y-2">
-        <span class="text-dark-gray">
+        <span class="text-deep-plum">
           Crafted
         </span>
-        <span class="ml-64 text-rose ">
+        <span class="ml-64 text-soft-gray">
           Suits  
         </span>
-        <span class="text-dark-gray">
+        <span class="text-deep-plum">
           Perfectly
         </span>
-        <span class="ml-28 pt-4 text-dark-gray text-4xl">
+        <span class="ml-28 pt-4 text-deep-plum text-4xl">
           Create Your Signature Style
         </span>
       </div>
@@ -57,24 +57,26 @@
               <label class="flex items-center gap-2">
                 <input
                   type="checkbox"
-                  class="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                  class="rounded border-gray-300 text-deep-plum focus:ring-primary-500"
                 />
                 <span class="text-gray-600">Remember me</span>
               </label>
-              <a href="#" class="text-primary-600 hover:underline">Forgot password?</a>
+              <a href="#" class="text-deep-plum hover:underline">Forgot password?</a>
             </div>
 
-            <BaseButton
+            <button
               type="submit"
-              label="Sign in"
-              customClass="w-full"
-            />
+              class="w-full rounded text-white px-6 py-3 text-sm
+              tracking-wide bg-deep-plum hover:bg-l-deep-plum transition"
+            >
+              Sign In
+            </button>
 
             <p class="text-sm text-gray-500 text-center">
               Don’t have an account yet?
               <router-link
                 :to="{ name: 'register' }"
-                class="font-medium text-primary-600 hover:underline"
+                class="font-medium text-deep-plum hover:underline"
               >
                 Sign up
               </router-link>
