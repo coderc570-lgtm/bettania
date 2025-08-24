@@ -8,7 +8,7 @@
       :name="name"
       :placeholder="placeholder"
       :rows="rows"
-      v-model="modelValue"
+      :value="modelValue"
       class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-4 py-2 focus:ring-black focus:border-black"
     ></textarea>
   </div>
