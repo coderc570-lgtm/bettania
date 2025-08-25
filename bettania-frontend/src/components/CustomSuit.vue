@@ -3,61 +3,70 @@
         class="flex flex-row
         items-center my-10
         space-x-8
+        items-stretch
         justify-center w-full"
     >
-        <div flex flex-col class="bg-gray-50 rounded-lg shadow-md border border-solid">
-            <div class="overflow-hidden relative">
+        <div class="bg-gray-50 rounded-lg shadow-md border border-solid flex flex-col">
+            <div class="overflow-hidden relative flex-2">
 
                 <!-- INNER LINING (always under) -->
                 <img 
                     v-if="selectedLiningId"
                     :src="lining.find(s => s.id === selectedLiningId)?.upper"
-                    class="top-0 left-0 w-full h-full object-scale-down z-0"
+                    class="top-0 left-0 w-full h-full z-0"
                 />
     
                 <!-- LOWER INNER LINING (always under) -->
                 <img 
                     v-if="selectedLiningId"
                     :src="lining.find(s => s.id === selectedLiningId)?.lower"
-                    class="absolute top-0 left-0 w-full h-full object-scale-down z-0"
+                    class="absolute top-0 left-0 w-full h-full z-0"
+                />
+
+                <!-- Buttons Layer -->
+                <img 
+                    v-if="selectedButtonImage"
+                    :src="selectedButtonImage"
+                    class="absolute top-0 left-0 w-full h-full z-20"
                 />
             
                 <!-- STYLE -->
                 <img 
                     v-if="selectedStyleId" 
                     :src="filteredSuitStyles.find(s => s.id === selectedStyleId)?.image" 
-                    class="absolute top-0 left-0 w-full h-full object-scale-down z-10"
+                    class="absolute top-0 left-0 w-full h-full z-10"
                 />
+                
             
                 <!-- SLEEVE -->
                 <img 
                     v-if="selectedStyleId"
                     :src="sleeve.find(s => s.id === filteredSuitStyles.find(style => style.id === selectedStyleId)?.sleeve_id)?.image"
-                    class="absolute top-0 left-0 w-full h-full object-scale-down z-10"
+                    class="absolute top-0 left-0 w-full h-full z-10"
                 />
             
                 <!-- NECK LINING -->
                 <img 
                     v-if="selectedStyleId"
                     :src="sleeve.find(s => s.id === filteredSuitStyles.find(style => style.id === selectedStyleId)?.sleeve_id)?.upper_lining"
-                    class="absolute top-0 left-0 w-full h-full object-scale-down z-10"
+                    class="absolute top-0 left-0 w-full h-full z-10"
                 />
             
                 <!-- BOTTOM -->
                 <img 
                     v-if="selectedStyleId"
                     :src="suitBottom.find(s => s.id === filteredSuitStyles.find(style => style.id === selectedStyleId)?.bottom_id)?.image"
-                    class="absolute top-0 left-0 w-full h-full object-scale-down z-10"
+                    class="absolute top-0 left-0 w-full h-full z-10"
                 />
             
             </div>
     
             <!-- TROUSERS (below top) -->
-            <div class="relative w-full mt-2">
+            <div class="relative w-full mt-2 flex-[1] h-1/2">
                 <img 
                     v-if="selectedTrousersId" 
                     :src="trousers.find(s => s.id === selectedTrousersId)?.image" 
-                    class="w-full h-full object-scale-down"
+                    class="w-full h-full object-none"
                 />
             </div>
         </div>
@@ -143,24 +152,17 @@
                 />
             </div>
 
-            <div>
+            <!-- <div>
                 <label class="flex items-center space-x-2 cursor-pointer">
                     <input type="checkbox" class="h-5 w-5 text-blue-600 focus:ring-0 border-gray-300 rounded" v-model="viewTrousers">
                     <span class="text-gray-700">Use a different fabric for trousers</span>
                 </label>                  
-            </div>
+            </div> -->
 
-            <div class="pt-4" 
-                v-if="viewTrousers" 
+            <div>Choose Trouser</div>
+            <div class="flex flex-row space-x-4 pt-2"
                 data-aos="fade-up"
                 data-aos-duration="1000"
-            >
-                Choose Trouser Fabric
-            </div>
-            <div class="flex flex-row space-x-4 pb-8 pt-2"
-                data-aos="fade-up"
-                data-aos-duration="1000"
-                v-if="viewTrousers"
             >
                 <BaseImageCard 
                     v-for="item in trousers" 
@@ -389,6 +391,367 @@ const lapelStyle = [
     }
 ]
 
+const buttonStyle = [
+    //NAVY SINGLE BREASTED 1BTN
+    {
+        id: 1,
+        title: 'Navy Single Breasted 1btn',
+        image: getImage('button-oberon-single-breasted-1btn.png'),
+        btn_id: 1,
+        style_id: 1
+    },
+    {
+        id: 2,
+        title: 'Navy Single Breasted 1btn',
+        image: getImage('button-oberon-single-breasted-1btn.png'),
+        btn_id: 1,
+        style_id: 5
+    },
+    {
+        id: 3,
+        title: 'Navy Single Breasted 1btn',
+        image: getImage('button-oberon-single-breasted-1btn.png'),
+        btn_id: 1,
+        style_id: 9
+    },
+    {
+        id: 4,
+        title: 'Navy Single Breasted 1btn',
+        image: getImage('button-oberon-single-breasted-1btn.png'),
+        btn_id: 1,
+        style_id: 13
+    },
+    //BROWN SINGLE BREASTED 1BTN
+    {
+        id: 5,
+        title: 'Brown Single Breasted 1btn',
+        image: getImage('button-brown-single-breasted-1btn.webp'),
+        btn_id: 2,
+        style_id: 1
+    },
+    {
+        id: 6,
+        title: 'Brown Single Breasted 1btn',
+        image: getImage('button-brown-single-breasted-1btn.webp'),
+        btn_id: 2,
+        style_id: 5
+    },
+    {
+        id: 7,
+        title: 'Brown Single Breasted 1btn',
+        image: getImage('button-brown-single-breasted-1btn.webp'),
+        btn_id: 2,
+        style_id: 9
+    },
+    {
+        id: 8,
+        title: 'Brown Single Breasted 1btn',
+        image: getImage('button-brown-single-breasted-1btn.webp'),
+        btn_id: 2,
+        style_id: 13
+    },
+
+    //GREY SINGLE BREASTED 1BTN
+    {
+        id: 9,
+        title: 'Grey Single Breasted 1btn',
+        image: getImage('button-dark-grey-single-breasted-1btn.png'),
+        btn_id: 3,
+        style_id: 1
+    },
+    {
+        id: 10,
+        title: 'Grey Single Breasted 1btn',
+        image: getImage('button-dark-grey-single-breasted-1btn.png'),
+        btn_id: 3,
+        style_id: 5
+    },
+    {
+        id: 11,
+        title: 'Grey Single Breasted 1btn',
+        image: getImage('button-dark-grey-single-breasted-1btn.png'),
+        btn_id: 3,
+        style_id: 9
+    },
+    {
+        id: 12,
+        title: 'Grey Single Breasted 1btn',
+        image: getImage('button-dark-grey-single-breasted-1btn.png'),
+        btn_id: 3,
+        style_id: 13
+    },
+
+    //NAVY SINGLE BREASTED 2BTN
+    {
+        id: 13,
+        title: 'Navy Single Breasted 2btn',
+        image: getImage('button-oberon-single-breasted-2btn.png'),
+        btn_id: 1,
+        style_id: 2
+    },
+    {
+        id: 14,
+        title: 'Navy Single Breasted 2btn',
+        image: getImage('button-oberon-single-breasted-2btn.png'),
+        btn_id: 1,
+        style_id: 6
+    },
+    {
+        id: 15,
+        title: 'Navy Single Breasted 2btn',
+        image: getImage('button-oberon-single-breasted-2btn.png'),
+        btn_id: 1,
+        style_id: 10
+    },
+    {
+        id: 16,
+        title: 'Navy Single Breasted 2btn',
+        image: getImage('button-oberon-single-breasted-2btn.png'),
+        btn_id: 1,
+        style_id: 14
+    },
+    //BROWN SINGLE BREASTED 2BTN
+    {
+        id: 17,
+        title: 'Brown Single Breasted 2btn',
+        image: getImage('button-brown-single-breasted-2btn.webp'),
+        btn_id: 2,
+        style_id: 2
+    },
+    {
+        id: 18,
+        title: 'Brown Single Breasted 2btn',
+        image: getImage('button-brown-single-breasted-2btn.webp'),
+        btn_id: 2,
+        style_id: 6
+    },
+    {
+        id: 19,
+        title: 'Brown Single Breasted 2btn',
+        image: getImage('button-brown-single-breasted-2btn.webp'),
+        btn_id: 2,
+        style_id: 10
+    },
+    {
+        id: 20,
+        title: 'Brown Single Breasted 2btn',
+        image: getImage('button-brown-single-breasted-2btn.webp'),
+        btn_id: 2,
+        style_id: 14
+    },
+
+    //GREY SINGLE BREASTED 2BTN
+    {
+        id: 21,
+        title: 'Grey Single Breasted 2btn',
+        image: getImage('button-dark-grey-single-breasted-2btn.png'),
+        btn_id: 3,
+        style_id: 2
+    },
+    {
+        id: 22,
+        title: 'Grey Single Breasted 2btn',
+        image: getImage('button-dark-grey-single-breasted-2btn.png'),
+        btn_id: 3,
+        style_id: 6
+    },
+    {
+        id: 23,
+        title: 'Grey Single Breasted 2btn',
+        image: getImage('button-dark-grey-single-breasted-2btn.png'),
+        btn_id: 3,
+        style_id: 10
+    },
+    {
+        id: 24,
+        title: 'Grey Single Breasted 2btn',
+        image: getImage('button-dark-grey-single-breasted-2btn.png'),
+        btn_id: 3,
+        style_id: 14
+    },
+
+    //NAVY DOUBLE BREASTED 4BTN
+    {
+        id: 25,
+        title: 'Navy Double Breasted 4btn',
+        image: getImage('button-oberon-double-breasted-4btn.png'),
+        btn_id: 1,
+        style_id: 3
+    },
+    {
+        id: 26,
+        title: 'Navy Double Breasted 4btn',
+        image: getImage('button-oberon-double-breasted-4btn.png'),
+        btn_id: 1,
+        style_id: 7
+    },
+    {
+        id: 27,
+        title: 'Navy Double Breasted 4btn',
+        image: getImage('button-oberon-double-breasted-4btn.png'),
+        btn_id: 1,
+        style_id: 11
+    },
+    {
+        id: 28,
+        title: 'Navy Double Breasted 4btn',
+        image: getImage('button-oberon-double-breasted-4btn.png'),
+        btn_id: 1,
+        style_id: 15
+    },
+
+    //BROWN DOOUBLE BREASTED 4BTN
+    {
+        id: 29,
+        title: 'Brown Double Breasted 4btn',
+        image: getImage('button-brown-double-breasted-4btn.webp'),
+        btn_id: 2,
+        style_id: 3
+    },
+    {
+        id: 30,
+        title: 'Brown Double Breasted 4btn',
+        image: getImage('button-brown-double-breasted-4btn.webp'),
+        btn_id: 2,
+        style_id: 7
+    },
+    {
+        id: 31,
+        title: 'Brown Double Breasted 4btn',
+        image: getImage('button-brown-double-breasted-4btn.webp'),
+        btn_id: 2,
+        style_id: 11
+    },
+    {
+        id: 32,
+        title: 'Brown Double Breasted 4btn',
+        image: getImage('button-brown-double-breasted-4btn.webp'),
+        btn_id: 2,
+        style_id: 15
+    },
+
+    //GREY DOUBLE BREASTED 4BTN
+    {
+        id: 33,
+        title: 'Grey Double Breasted 4btn',
+        image: getImage('button-dark-grey-double-breasted-4btn.png'),
+        btn_id: 3,
+        style_id: 3
+    },
+    {
+        id: 34,
+        title: 'Grey Double Breasted 4btn',
+        image: getImage('button-dark-grey-double-breasted-4btn.png'),
+        btn_id: 3,
+        style_id: 7
+    },
+    {
+        id: 35,
+        title: 'Grey Double Breasted 4btn',
+        image: getImage('button-dark-grey-double-breasted-4btn.png'),
+        btn_id: 3,
+        style_id: 11
+    },
+    {
+        id: 36,
+        title: 'Grey Double Breasted 4btn',
+        image: getImage('button-dark-grey-double-breasted-4btn.png'),
+        btn_id: 3,
+        style_id: 15
+    },
+
+    //NAVY DOUBLE BREASTED 4BTN
+    {
+        id: 37,
+        title: 'Navy Double Breasted 6btn',
+        image: getImage('button-oberon-double-breasted-6btn.webp'),
+        btn_id: 1,
+        style_id: 4
+    },
+    {
+        id: 38,
+        title: 'Navy Double Breasted 6btn',
+        image: getImage('button-oberon-double-breasted-6btn.webp'),
+        btn_id: 1,
+        style_id: 8
+    },
+    {
+        id: 39,
+        title: 'Navy Double Breasted 6btn',
+        image: getImage('button-oberon-double-breasted-6btn.webp'),
+        btn_id: 1,
+        style_id: 12
+    },
+    {
+        id: 40,
+        title: 'Navy Double Breasted 6btn',
+        image: getImage('button-oberon-double-breasted-6btn.webp'),
+        btn_id: 1,
+        style_id: 16
+    },
+
+    //BROWN DOOUBLE BREASTED 4BTN
+    {
+        id: 41,
+        title: 'Brown Double Breasted 6btn',
+        image: getImage('button-brown-double-breasted-6btn.webp'),
+        btn_id: 2,
+        style_id: 4
+    },
+    {
+        id: 42,
+        title: 'Brown Double Breasted 6btn',
+        image: getImage('button-brown-double-breasted-6btn.webp'),
+        btn_id: 2,
+        style_id: 8
+    },
+    {
+        id: 43,
+        title: 'Brown Double Breasted 6btn',
+        image: getImage('button-brown-double-breasted-6btn.webp'),
+        btn_id: 2,
+        style_id: 12
+    },
+    {
+        id: 44,
+        title: 'Brown Double Breasted 6btn',
+        image: getImage('button-brown-double-breasted-6btn.webp'),
+        btn_id: 2,
+        style_id: 16
+    },
+
+    //GREY DOUBLE BREASTED 4BTN
+    {
+        id: 45,
+        title: 'Grey Double Breasted 6btn',
+        image: getImage('button-dark-grey-double-breasted-6btn.png'),
+        btn_id: 3,
+        style_id: 4
+    },
+    {
+        id: 46,
+        title: 'Grey Double Breasted 6btn',
+        image: getImage('button-dark-grey-double-breasted-6btn.png'),
+        btn_id: 3,
+        style_id: 8
+    },
+    {
+        id: 47,
+        title: 'Grey Double Breasted 6btn',
+        image: getImage('button-dark-grey-double-breasted-6btn.png'),
+        btn_id: 3,
+        style_id: 12
+    },
+    {
+        id: 48,
+        title: 'Grey Double Breasted 6btn',
+        image: getImage('button-dark-grey-double-breasted-6btn.png'),
+        btn_id: 3,
+        style_id: 16
+    },
+    
+]
+
 const buttons = [
     {
         id: 1,
@@ -398,12 +761,12 @@ const buttons = [
     {
         id: 2,
         title: 'Brown',
-        image: getImage('button-dark-grey-thumbnail.webp'),
+        image: getImage('button-brown-thumbnail.avif'),
     },
     {
         id: 3,
         title: 'Dark Grey',
-        image: getImage('button-brown-thumbnail.avif'),
+        image: getImage('button-dark-grey-thumbnail.webp'),
     }
 ]
 
@@ -509,5 +872,14 @@ function selectTrousers(id: number) {
 const filteredSuitStyles = computed(() => {
   if (!selectedFabricId.value) return []
   return suitStyle.filter(s => s.fabric_id === selectedFabricId.value && s.notch_id === selectedLapelId.value)
+})
+
+const selectedButtonImage = computed(() => {
+  if (!selectedStyleId.value || !selectedButtonsId.value) return null
+
+  const selectedButtonPattern = buttonStyle.find(b => b.btn_id === selectedButtonsId.value && b.style_id === selectedStyleId.value)
+
+//   console.log(selectedButtonPattern, 'style: ' ,selectedStyleId.value, ' button:', selectedButtonsId.value)
+  return selectedButtonPattern?.image || null;
 })
 </script>
