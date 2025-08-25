@@ -121,37 +121,53 @@
             data-aos="fade-up"
             :data-aos-delay="300"
         >
-           <div
-              v-for="(product, index) in products"
-              :key="index"
-              class="border rounded-xl shadow-sm p-4 hover:shadow-md transition flex flex-col justify-between"
+            <div
+                v-for="(product, index) in products"
+                :key="index"
+                class="border
+                rounded-xl
+                shadow-sm p-4
+                hover:shadow-md
+                transition flex
+                flex-col justify-between"
             >
-              <div class="overflow-hidden rounded-lg mb-4">
+                <div class="overflow-hidden rounded-lg mb-4">
                 <img
-                  :src="product.image || require('@/assets/images/bettania-logo.png')"
-                  alt="Variant Image"
-                  class="w-full h-48 object-cover transform transition-transform duration-300 hover:scale-105"
+                    :src="product.image"
+                    alt="Product Image"
+                    class="w-full h-48
+                    object-cover transform
+                    transition-transform
+                    duration-300 hover:scale-105"
                 />
-              </div>
+                </div>
 
-              <h2 class="text-lg font-semibold text-gray-800 mb-2">
-                {{ product.title }}
-              </h2>
+                <h2 class="text-lg font-semibold text-gray-800 mb-1">
+                    {{ product.title }}
+                </h2>
 
-              <p class="text-sm text-gray-600 mb-4">
-                Category: {{ product.category.name }}
-              </p>
+                <p class="text-sm text-gray-600 mb-2 line-clamp-2">
+                    {{ product.description }}
+                </p>
+                
+                <p class="text-xs font-medium text-deep-plum mb-2">
+                  Variant Type: {{ product.variant }}
+                </p>
 
-              <div class="flex justify-end gap-4 text-xl text-gray-500 mt-auto">
+                <p class="text-base font-bold text-black mb-4">
+                ${{ product.price }}
+                </p>
+
+                <div class="flex justify-end gap-4 text-xl text-gray-500 mt-auto">
                 <button @click="editProduct(product)">
-                  <i class="ri-edit-2-line hover:text-blue-500"></i>
+                    <i class="ri-edit-2-line hover:text-blue-500"></i>
                 </button>
                 <button @click="confirmDelete(product)">
-                  <i class="ri-delete-bin-line hover:text-red-500"></i>
-                </button>
-              </div>
+              <i class="ri-delete-bin-line hover:text-red-500"></i>
+            </button>
+                
+                </div>
             </div>
-
         </div>
     </div>
     <AddProductModal
@@ -169,7 +185,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import BaseHeaderNavigation from '@/components/Base/BaseHeaderNavigation.vue';
 import AddProductModal from '@/components/Modal/AddProductModal.vue'
 import DeleteProductModal from '@/components/Modal/DeleteProductModal.vue';
@@ -185,22 +200,39 @@ export default {
       showModal: false,
       showDeleteModal: false,
       productToDelete: null,
-      products: [],
+      products: [
+        {
+          image: '/images/sicilian-grey-neck-lapel-single-breasted-peak-2btn.webp',
+          title: 'Sicilian Grey Peak Lapel Blazer',
+          description: 'Single-breasted blazer with peak lapel design in Sicilian grey.',
+          price: 149.99,
+          variant: 'Style'
+        },
+        {
+          image: '/images/neck-lapel-notch-double-breasted-6btn.webp',
+          title: 'Notch Lapel Double-Breasted Blazer',
+          description: 'Elegant 6-button blazer with a classic notch lapel and tailored fit.',
+          price: 179.0,
+          variant: 'Style'
+        },
+        {
+          image: '/images/lining-inoniz-thumbnail.jpg',
+          title: 'Inoniz Lining Fabric Sample',
+          description: 'High-quality lining material sample from the Inoniz collection.',
+          price: 15.5,
+          variant: 'Fabric'
+        },
+        {
+          image: '/images/lining-back-upper-alt-inoniz.webp',
+          title: 'Inoniz Back Upper Lining',
+          description: 'Premium back-upper lining with a smooth finish and durability.',
+          price: 19.99,
+          variant: 'Internal Lining'
+        }
+      ]
     };
   },
-  mounted() {
-    this.fetchVariants();
-  },
   methods: {
-    fetchVariants() {
-      axios.get('/api/v1/variant')
-        .then(response => {
-          this.products = response.data;
-        })
-        .catch(error => {
-          console.error('Error fetching variants:', error);
-        });
-    },
     handleAddProduct(product) {
       this.products.push(product);
     },
