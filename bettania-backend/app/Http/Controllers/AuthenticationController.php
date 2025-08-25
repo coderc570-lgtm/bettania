@@ -10,6 +10,7 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
 use App\Modules\Auth\AuthServiceInterface;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 class AuthenticationController extends Controller
@@ -27,26 +28,17 @@ class AuthenticationController extends Controller
     public function authenticate(Request $request)
     {
         $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'code'    => 'required|string',
+            'email'    => 'required|email',
+            'password' => 'required|string',
         ]);
     
-        $verification = VerificationCode::where('user_id', $request->user_id)
-            ->where('code', $request->code)
-            ->where('is_used', false)
-            ->where('expires_at', '>', now())
-            ->first();
-    
-        if (! $verification) {
+        if (!Auth::attempt($request->only('email', 'password'))) {
             return response()->json([
-                'message' => 'Invalid or expired verification code.',
+                'message' => 'Invalid credentials.',
             ], 422);
         }
     
-        $verification->update(['is_used' => true]);
-    
-        $user = User::findOrFail($request->user_id);
-    
+        $user = Auth::user();
         $token = $user->createToken('auth_token')->plainTextToken;
     
         return response()->json([
