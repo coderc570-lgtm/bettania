@@ -1,64 +1,56 @@
 <template>
   <div class="min-h-screen bg-white flex flex-col">
-    <BaseHeader class="bg-gradient-to-r from-deep-plum to-l-deep-plum shadow-md">
-        <div class="mx-16 mb-8 mt-20">
-            <span class="flex items-center gap-6 pb-3 text-[1rem] font-medium text-white">
-            <span class="h-[2px] w-10 bg-white"></span>
-
-            <router-link
-                to="/"
-                class="px-3 py-1 rounded-md
-                transition-colors duration-200
-                hover:bg-white hover:text-black"
-            >
-                HOME
-            </router-link>
-            <router-link
-                to="/admin"
-                class="px-3 py-1 rounded-md
-                transition-colors duration-200
-                hover:bg-white hover:text-black"
-            >
-                ADMIN
-            </router-link>
-            </span>
-            <h1 class="text-4xl font-extrabold text-white lg:text-6xl">
-                Categories
-            </h1>
-        </div>
-    </BaseHeader>
+    <BaseHeaderNavigation title="Categories" />
 
     <div class="mx-16 my-8">
         <div class="my-6 flex flex-wrap items-center justify-between gap-4">
             <div class="flex flex-wrap justify-start gap-2">
-            <button
-                type="button"
-                class="
-                w-auto
-                border-black
-                bg-black
-                focus:bg-brand-grey hover:bg-black w-40
-                rounded-xl
-                border
-                border-solid
-                px-4
-                py-2
-                text-center
-                text-white
-                "
-            >
-                <span
-                    class="flex items-center justify-center"
-                    aria-hidden="true"
+                <button
+                    type="button"
+                    @click="showModal = true"
+                    class="bg-soft-gray
+                    w-40 rounded-xl
+                    border border-black
+                    px-4 py-2 text-center"
                 >
-                    <i class="ri-add-line"></i>
-                    <span class="pr-1">
-                        Add Category
+                    <span class="flex items-center justify-center">
+                        <i class="ri-add-line"></i>
+                        <span class="pr-1">
+                            Add Category
+                        </span>
                     </span>
-                </span>
+                </button>
+            </div>
+            <div class="relative">
+            <input
+                type="text"
+                placeholder="Search"
+                class="rounded-full
+                border border-soft-gray
+                px-6 py-2 w-72
+                focus:outline-none"
+            />
+            <button
+                class="absolute
+                right-0 top-0
+                h-full px-4
+                bg-soft-gray
+                rounded-r-full"
+            >
+                <i class="ri-search-line"></i>
             </button>
             </div>
         </div>
     </div>
   </div>
 </template>
+
+<script>
+import BaseHeaderNavigation from '@/components/Base/BaseHeaderNavigation.vue';
+
+export default {
+  components: {
+    BaseHeaderNavigation,
+ },
+}
+</script>

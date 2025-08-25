@@ -1,5 +1,5 @@
 <template>
-  <section class="h-[70vh] bg-stone-gray flex flex-col px-16 md:px-24 py-12" data-aos="fade-up">
+  <section class="h-[70vh] bg-stone-gray flex flex-col px-16 md:px-24 py-12">
     <div class="grid grid-cols-2">
       <div class="h-full" data-aos="zoom-in-right" data-aos-delay="400">
         <img

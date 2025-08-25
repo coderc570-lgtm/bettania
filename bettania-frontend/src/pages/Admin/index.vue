@@ -21,6 +21,8 @@
           v-for="panel in panels"
           :key="panel.title"
           class="rounded border pt-6 border-gray-200 bg-white shadow-sm text-center"
+          data-aos="fade-up"
+          :data-aos-delay="index * 100"
         >
           <router-link
             :to="panel.route"

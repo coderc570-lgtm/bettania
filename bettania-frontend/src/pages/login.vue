@@ -1,24 +1,43 @@
 <template>
   <section class="min-h-auto md:min-h-[90vh] bg-light-gray flex flex-col md:flex-row">
-    <!-- Left Column -->
+
     <div class="hidden md:flex w-full md:w-1/2 items-center justify-center px-6 py-12 bg-gray-100">
-        <div class="flex flex-col items-center text-9xl font-semibold space-y-2">
-        <span class="text-deep-plum">
+      <div class="flex flex-col items-center text-9xl font-semibold space-y-2">
+        <span
+          class="text-deep-plum"
+          data-aos="zoom-in"
+          data-aos-easing="ease-out-back"
+          data-aos-delay="0"
+        >
           Crafted
         </span>
-        <span class="ml-64 text-soft-gray">
+        <span
+          class="ml-64 text-soft-gray"
+          data-aos="zoom-in"
+          data-aos-easing="ease-out-back"
+          data-aos-delay="150"
+        >
           Suits  
         </span>
-        <span class="text-deep-plum">
+        <span
+          class="text-deep-plum"
+          data-aos="zoom-in"
+          data-aos-easing="ease-out-back"
+          data-aos-delay="300"
+        >
           Perfectly
         </span>
-        <span class="ml-28 pt-4 text-deep-plum text-4xl">
+        <span
+          class="ml-28 pt-4 text-deep-plum text-4xl"
+          data-aos="zoom-in"
+          data-aos-easing="ease-out-back"
+          data-aos-delay="450"
+        >
           Create Your Signature Style
         </span>
       </div>
     </div>
 
-    <!-- Right Column (Login Form) -->
     <div class="w-full md:w-1/2 flex flex-col items-center justify-center px-6 py-12">
       <router-link
         :to="{ name: 'home' }"

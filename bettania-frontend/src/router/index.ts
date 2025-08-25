@@ -6,9 +6,10 @@ import UserLogin from '@/pages/login.vue'
 import HomePage from '@/pages/index.vue'
 import SignUp from '@/pages/register.vue'
 import ProfileSettings from '@/pages/User/profile-setting.vue'
-import CreateEvent from '@/components/CreateEvent.vue'
 import Contact from '@/pages/contact.vue'
 import CustomSuit from '@/components/CustomSuit.vue'
+import CustomSuitTest from '@/components/CustomSuitTest.vue'
+
 import Cart from '@/pages/cart.vue'
 
 // Admin pages
@@ -27,16 +28,17 @@ const routes = [
     path: '/login',
     component: UserLogin,
     name: 'login',
+    meta: {
+      title: 'Bettania - Login'
+    }
   },
   {
     path: '/register',
     component: SignUp,
     name: 'register',
-  },
-  {
-    path: '/create-event',
-    component: CreateEvent,
-    name: 'create-event',
+    meta: {
+      title: 'Bettania - Register'
+    }
   },
   {
     path: '/profile',
@@ -48,16 +50,25 @@ const routes = [
     path: '/contact',
     component: Contact,
     name: 'contact',
+    meta: {
+      title: 'Bettania - Contact'
+    }
   },
   {
     path: '/custom-suit',
     component: CustomSuit,
     name: 'custom-suit',
+    meta: {
+      title: 'Bettania - Custom Suit'
+    }
   },
   {
     path: '/cart',
     component: Cart,
     name: 'cart',
+    meta: {
+      title: 'Bettania - Cart'
+    }
   },
 
   // Admin parent with children routes
@@ -65,21 +76,41 @@ const routes = [
     path: '/admin',
     component: Admin,
     name: 'admin',
+    meta: {
+      title: 'Bettania - Admin'
+    }
   },
   {
     path: '/admin/product',
     component: Product,
     name: 'product',
+    meta: {
+      title: 'Bettania - Products'
+    }
   },
   {
     path: '/admin/categories',
     component: Categories,
     name: 'categories',
+    meta: {
+      title: 'Bettania - Categories'
+    }
   },
   {
     path: '/admin/users',
     component: User,
     name: 'user',
+    meta: {
+      title: 'Bettania - Users'
+    }
+  },
+  {
+    path: '/test',
+    component: CustomSuitTest,
+    name: 'test',
+    meta: {
+      title: 'Bettania - Test'
+    }
   },
 ]
 
