@@ -32,13 +32,30 @@ authStore.checkAuth();
 // Mount the app
 app.mount('#app');
 
-// ✅ Initialize AOS after mounting
 AOS.init({
-  once: true, // run only once per element
-  duration: 800, // animation duration in ms
+  once: false,
+  duration: 800,
+  easing: 'ease-out-back',
+  mirror: true,
 });
 
-// 🔁 Optional: re-init AOS on route change (useful for SPA)
 router.afterEach(() => {
-  AOS.refresh();
+  setTimeout(() => {
+    AOS.refreshHard();
+  }, 100);
+});
+
+
+router.afterEach((to) => {
+  // Update AOS animations
+  setTimeout(() => {
+    AOS.refreshHard();
+  }, 100);
+
+  // Update document title
+  if (to.meta?.title) {
+    document.title = to.meta.title as string;
+  } else {
+    document.title = 'Bettania'; // Default fallback
+  }
 });

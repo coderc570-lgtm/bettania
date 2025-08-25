@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-stone-gray flex flex-col px-16 md:px-24 pt-8 pb-24" data-aos="fade-up">
+  <section class="bg-stone-gray flex flex-col px-16 md:px-24 pt-8 pb-24">
     <div class="flex flex-col items-center justify-center gap-8">
       <h1 class="text-4xl font-bold" data-aos="fade-down" data-aos-delay="300">
         ABOUT US

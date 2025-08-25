@@ -1,7 +1,6 @@
 <template>
   <section
     class="min-h-screen bg-stone-gray flex flex-col px-16 md:px-24 py-12"
-    data-aos="fade-up"
   >
     <h2 class="text-xl font-medium text-gray-800 mb-4" data-aos="fade-up" data-aos-delay="100">
       SHOP THIS OUTFIT

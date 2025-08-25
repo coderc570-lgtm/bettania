@@ -12,7 +12,7 @@
     @apply font-title;
   }
   
-  p, a, span, ul, li, button {
+  p, a, span, ul, li, button, label, select, option, input {
     @apply font-text;
   }
 }
