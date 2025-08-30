@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Cache;
 use Venturecraft\Revisionable\RevisionableTrait;
 
-class BackTyle extends Model
+class BackStyle extends Model
 {
     use HasFactory, SoftDeletes, RevisionableTrait;
 
@@ -20,7 +20,7 @@ class BackTyle extends Model
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        $cache_name = "BackTyle_model_columns";
+        $cache_name = "BackStyle_model_columns";
 
         // Check if the column listing is cached
         if (!Cache::has($cache_name)) {
