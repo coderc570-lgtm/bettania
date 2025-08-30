@@ -16,7 +16,10 @@ return new class extends Migration
             $table->string('color')->nullable();
             $table->string('color_code')->nullable();
             $table->unsignedBigInteger('fabric_design_id')->nullable();
+            $table->unsignedBigInteger('fabric_season_id')->nullable();
+
             $table->foreign('fabric_design_id')->references('id')->on('fabric_designs')->onDelete('cascade');
+            $table->foreign('fabric_season_id')->references('id')->on('fabric_seasons')->onDelete('cascade');
         });
     }
 
