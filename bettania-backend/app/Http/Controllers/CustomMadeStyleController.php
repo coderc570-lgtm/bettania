@@ -1,0 +1,89 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\CustomMadeStyle\Create;
+use App\Http\Requests\CustomMadeStyle\Destroy;
+use App\Http\Requests\CustomMadeStyle\Edit;
+use App\Http\Requests\CustomMadeStyle\ForceDelete;
+use App\Http\Requests\CustomMadeStyle\Index;
+use App\Http\Requests\CustomMadeStyle\Restore;
+use App\Http\Requests\CustomMadeStyle\Show;
+use App\Http\Requests\CustomMadeStyle\Store;
+use App\Http\Requests\CustomMadeStyle\Update;
+use App\Repositories\CustomMadeStyleRepository;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
+
+class CustomMadeStyleController extends Controller
+{
+    protected CustomMadeStyleRepository $CustomMadeStyleRepository;
+    protected array $selected_relation_columns_only = [
+//            "suppliers_encoded_by_foreign" => ['id', 'first_name', 'middle_name', 'last_name', 'email']
+        ];
+    protected array $headers = [
+//            ['text' => 'Supplier', 'value' => 'suppliers_name', 'align' => 'left', 'sortable' => false],
+        ];
+
+    public function __construct(CustomMadeStyleRepository $CustomMadeStyleRepository)
+    {
+        $this->CustomMadeStyleRepository = $CustomMadeStyleRepository;
+    }
+
+    public function index(Index $request): JsonResponse
+    {
+        $payload = $request->validated();
+        $data = $this->CustomMadeStyleRepository->index($payload, $this->selected_relation_columns_only, $this->headers);
+        return $this->CustomMadeStyleRepository->getJsonResponse($data);
+    }
+
+    public function create(Create $request): JsonResponse
+    {
+        $data = $this->CustomMadeStyleRepository->create();
+        return $this->CustomMadeStyleRepository->getJsonResponse($data);
+    }
+
+    public function store(Store $request): JsonResponse
+    {
+        $payload = $request->validated();
+        $data = $this->CustomMadeStyleRepository->store($payload, $this->selected_relation_columns_only, $this->headers);
+        return $this->CustomMadeStyleRepository->getJsonResponse($data);
+    }
+
+    public function show(Show $request, $id): JsonResponse
+    {
+        $data = $this->CustomMadeStyleRepository->show($id, $this->selected_relation_columns_only);
+        return $this->CustomMadeStyleRepository->getJsonResponse($data);
+    }
+
+    public function edit(Edit $request, $id): JsonResponse
+    {
+        $data = $this->CustomMadeStyleRepository->edit($id, $this->selected_relation_columns_only);
+        return $this->CustomMadeStyleRepository->getJsonResponse($data);
+    }
+
+    public function update(Update $request, $id): JsonResponse
+    {
+        $payload = $request->validated();
+        $data = $this->CustomMadeStyleRepository->update($payload, $id, $this->selected_relation_columns_only, $this->headers);
+        return $this->CustomMadeStyleRepository->getJsonResponse($data);
+    }
+
+    public function destroy(Destroy $request, $id): JsonResponse
+    {
+        $data = $this->CustomMadeStyleRepository->destroy($id, $this->selected_relation_columns_only);
+        return $this->CustomMadeStyleRepository->getJsonResponse($data);
+    }
+
+    public function forceDelete(ForceDelete $request, $id): JsonResponse
+    {
+        $data = $this->CustomMadeStyleRepository->forceDelete($id, $this->selected_relation_columns_only);
+        return $this->CustomMadeStyleRepository->getJsonResponse($data);
+    }
+
+    public function restore(Restore $request, $id): JsonResponse
+    {
+        $data = $this->CustomMadeStyleRepository->restore($id, $this->selected_relation_columns_only);
+        return $this->CustomMadeStyleRepository->getJsonResponse($data);
+    }
+}

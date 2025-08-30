@@ -1,0 +1,34 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('custom_made_styles', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('custom_made_id')->nullable();
+            $table->string('name')->nullable();
+            $table->text('description')->nullable();
+            $table->text('filepath')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('custom_made_id')->references('id')->on('custom_mades')->onDelete('cascade');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('custom_made_styles');
+    }
+};
