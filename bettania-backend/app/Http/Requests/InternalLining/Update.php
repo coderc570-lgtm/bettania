@@ -21,6 +21,8 @@ class Update extends FormRequest
             'name' => ['required'],
             'price' => ['required', 'numeric'],
             'filepath' => ['nullable', 'string'],
+            'upper_filepath' => ['nullable', 'string'],
+            'lower_filepath' => ['nullable', 'string']
         ];
 
         return array_merge($this->payloadRules(), $additional_rules);
