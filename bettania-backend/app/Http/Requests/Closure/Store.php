@@ -22,7 +22,8 @@ class Store extends FormRequest
             'title' => ['required'],
             'description' => ['required'],
             'filepath' => ['required'],
-            'custom_made_id' => ['required', Rule::exists('custom_mades', 'id')->whereNull('deleted_at')]
+            'custom_made_id' => ['required', Rule::exists('custom_mades', 'id')->whereNull('deleted_at')],
+            'price' => ['nullable', 'numeric']
         ];
 
         return array_merge($this->payloadRules(), $additional_rules);
