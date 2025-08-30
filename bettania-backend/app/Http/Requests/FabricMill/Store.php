@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Requests\FabricMaterial;
+namespace App\Http\Requests\FabricMill;
 
 use App\Traits\PayloadRuleTrait;
 use Illuminate\Foundation\Http\FormRequest;
 use Bouncer;
-use Illuminate\Validation\Rule;
 
-class Update extends FormRequest
+class Store extends FormRequest
 {
     use PayloadRuleTrait;
 
@@ -19,8 +18,7 @@ class Update extends FormRequest
     public function rules(): array
     {
         $additional_rules = [
-            'title' => ['required'],
-            'head_fabric_material_id' => ['required', Rule::exists('fabric_materials', 'id')->whereNull('deleted_at')]
+            'title' => ['required']
         ];
 
         return array_merge($this->payloadRules(), $additional_rules);
