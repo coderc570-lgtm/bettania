@@ -20,6 +20,8 @@ return new class extends Migration
             $table->decimal('price', 10, 2)->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('custom_made_id')->references('id')->on('custom_mades')->onDelete('cascade');
         });
     }
 
