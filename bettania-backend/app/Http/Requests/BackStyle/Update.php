@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Style;
+namespace App\Http\Requests\BackStyle;
 
 use App\Traits\PayloadRuleTrait;
 use Illuminate\Foundation\Http\FormRequest;

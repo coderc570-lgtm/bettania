@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Style;
+namespace App\Http\Requests\LiningColor;
 
 use App\Traits\PayloadRuleTrait;
 use Illuminate\Foundation\Http\FormRequest;
 use Bouncer;
-use Illuminate\Validation\Rule;
 
-class Update extends FormRequest
+class Store extends FormRequest
 {
     use PayloadRuleTrait;
 
@@ -20,10 +19,9 @@ class Update extends FormRequest
     {
         $additional_rules = [
             'name' => ['required'],
-            'price' => ['required', 'numeric'],
-            'filepath' => ['nullable', 'string'],
-            'description' => ['required'],
-            'custom_made_id' => ['nullable', Rule::exists('custom_mades', 'id')->whereNull('deleted_at')],
+            'code' => ['required'],
+            'filepath' => ['nullable'],
+            'price' => ['nullable']
         ];
 
         return array_merge($this->payloadRules(), $additional_rules);
