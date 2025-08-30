@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pockets', function (Blueprint $table) {
+        Schema::create('lining_colors', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('custom_made_id')->nullable();
             $table->string('name')->nullable();
-            $table->text('description')->nullable();
+            $table->string('code')->nullable();
             $table->text('filepath')->nullable();
-            $table->decimal('price', 10, 2)->nullable();    
+            $table->decimal('price', 10, 2)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pockets');
+        Schema::dropIfExists('lining_colors');
     }
 };
