@@ -19,6 +19,11 @@ use App\Modules\Organizer\OrganizerService;
 use App\Repository\OrganizerRepositoryInterface;
 use App\Repository\Eloquent\OrganizerRepository;
 
+use App\Modules\Variant\VariantServiceInterface;
+use App\Modules\Variant\VariantService;
+use App\Repository\VariantRepositoryInterface;
+use App\Repository\Eloquent\VariantRepository;
+
 class RepositoryServiceProvider extends ServiceProvider
 {
     /**
@@ -33,6 +38,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(AuthServiceInterface::class, AuthService::class);
         $this->app->bind(EventServiceInterface::class, EventService::class);
         $this->app->bind(OrganizerServiceInterface::class, OrganizerService::class);
+        $this->app->bind(VariantServiceInterface::class, VariantService::class);
 
         
         $this->app->singleton(MediaService::class, function ($app) {
@@ -44,7 +50,7 @@ class RepositoryServiceProvider extends ServiceProvider
          */
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(EventRepositoryInterface::class, EventRepository::class);
-        $this->app->bind(OrganizerRepositoryInterface::class, OrganizerRepository::class);
+        $this->app->bind(VariantRepositoryInterface::class, VariantRepository::class);
     }
 
     /**
