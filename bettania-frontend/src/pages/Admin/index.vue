@@ -62,7 +62,7 @@ export default {
         {
           title: 'Fabric',
           icon: 'ri-t-shirt-line',
-          route: '/admin/variants/fabric',
+          route: '/admin/fabric',
           desc: 'Edit fabrics',
         },
         {

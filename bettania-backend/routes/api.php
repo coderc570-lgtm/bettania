@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\TempFileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VariantController;
 use Illuminate\Support\Str;
 
 /*
@@ -33,6 +34,15 @@ Route::prefix('v1')->group(function () {
         Route::post('/reset-password', [AuthenticationController::class, 'resetPassword'])->name('resetPassword');
         Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
         Route::get('/check', [AuthenticationController::class, 'checkAuth']);
+    });
+
+
+    Route::prefix('variant')->group(function () {
+        Route::get('/', [VariantController::class, 'index']);
+        Route::post('/', [VariantController::class, 'store']);
+        Route::get('/{id}', [VariantController::class, 'show']);
+        Route::put('/{id}', [VariantController::class, 'update']);
+        Route::delete('/{id}', [VariantController::class, 'destroy']);
     });
 
     Route::get('/guest-cart', [CartController::class, 'guestIndex']);
