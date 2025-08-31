@@ -17,11 +17,8 @@ import Admin from '@/pages/Admin/index.vue'
 import Product from '@/pages/Admin/product.vue'
 import Categories from '@/pages/Admin/categories.vue'
 import User from '@/pages/Admin/user.vue'
-<<<<<<< Updated upstream
 import NewCustomSuit from '@/components/NewCustomSuit.vue'
-=======
 import Fabric from '@/pages/Admin/fabric.vue'
->>>>>>> Stashed changes
 
 const routes = [
   {
