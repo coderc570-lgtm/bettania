@@ -2,7 +2,7 @@
   <div class="w-full">
     <Home/>
     <Shop/>
-    <CustomSuit/>
+    <NewCustomSuit/>
     <Gallery/>
     <About/>
     <Explore/>
@@ -17,13 +17,14 @@ import CustomSuit from '@/components/Home/CustomSuit.vue';
 import Gallery from '@/components/Home/Gallery.vue';
 import About from '@/components/Home/About.vue';
 import Explore from '@/components/Home/Explore.vue';
+import NewCustomSuit from '@/components/NewCustomSuit.vue';
 
 export default defineComponent({
   name: 'HomePage',
   components: {
     Home,
     Shop,
-    CustomSuit,
+    NewCustomSuit,
     Gallery,
     About,
     Explore,

@@ -17,6 +17,7 @@ import Admin from '@/pages/Admin/index.vue'
 import Product from '@/pages/Admin/product.vue'
 import Categories from '@/pages/Admin/categories.vue'
 import User from '@/pages/Admin/user.vue'
+import NewCustomSuit from '@/components/NewCustomSuit.vue'
 
 const routes = [
   {
@@ -56,7 +57,7 @@ const routes = [
   },
   {
     path: '/custom-suit',
-    component: CustomSuit,
+    component: NewCustomSuit,
     name: 'custom-suit',
     meta: {
       title: 'Bettania - Custom Suit'

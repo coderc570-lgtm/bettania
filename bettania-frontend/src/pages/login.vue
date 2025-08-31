@@ -110,14 +110,14 @@
 <script>
 import { defineComponent } from 'vue';
 import { useAuthStore } from '@/store/authLogin';
-import BaseButton from '@/components/Base/BaseButton.vue';
+// import BaseButton from '@/components/Base/BaseButton.vue';
 import BaseInput from '@/components/Base/BaseInput.vue';
 import logo from '@/assets/images/bettania-logo.png';
 
 export default defineComponent({
   name: 'UserLogin',
   components: {
-    BaseButton,
+    // BaseButton,
     BaseInput,
   },
   data() {
