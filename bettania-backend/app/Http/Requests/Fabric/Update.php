@@ -24,10 +24,10 @@ class Update extends FormRequest
             'filepath' => ['nullable', 'string'],
             'color' => ['required'],
             'color_code' => ['nullable'],
-            'fabric_design_id' => ['required', Rule::exists('fabric_designs', 'id')->whereNull('deleted_at')],
-            'fabric_season_id' => ['required', Rule::exists('fabric_seasons', 'id')->whereNull('deleted_at')],
-            'fabric_material_id' => ['required', Rule::exists('fabric_materials', 'id')->whereNull('deleted_at')],
-            'fabric_mill_id' => ['required', Rule::exists('fabric_mills', 'id')->whereNull('deleted_at')]
+            'fabric_design_id' => ['nullable', Rule::exists('fabric_designs', 'id')->whereNull('deleted_at')],
+            'fabric_season_id' => ['nullable', Rule::exists('fabric_seasons', 'id')->whereNull('deleted_at')],
+            'fabric_material_id' => ['nullable', Rule::exists('fabric_materials', 'id')->whereNull('deleted_at')],
+            'fabric_mill_id' => ['nullable', Rule::exists('fabric_mills', 'id')->whereNull('deleted_at')]
         ];
 
         return array_merge($this->payloadRules(), $additional_rules);
