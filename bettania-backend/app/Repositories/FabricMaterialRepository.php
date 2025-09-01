@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\FabricMaterial;
 use App\Traits\QueryGenerator;
 use Illuminate\Database\Eloquent\Casts\Json;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class FabricMaterialRepository
@@ -73,7 +74,14 @@ class FabricMaterialRepository
         }
 
         // Get total count for pagination
-        $total = $query->count();
+        $subQuery = clone $query;
+
+        $subQuery->select(DB::raw('COUNT(*) as count'))->getQuery();
+
+        // Use the subquery to count rows
+        $total = DB::table(DB::raw("({$subQuery->toSql()}) as sub"))
+            ->mergeBindings($subQuery->getQuery())
+            ->count();
 
         // Apply pagination logic
         $pagination = $this->paginate($payload, $total);
