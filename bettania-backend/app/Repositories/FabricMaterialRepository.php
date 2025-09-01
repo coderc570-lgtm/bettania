@@ -57,6 +57,10 @@ class FabricMaterialRepository
         $this->search($payload, $query, $selects);
         $this->searchGlobal($payload, $query, $selects);
 
+        $query->groupBy([
+            'fabric_materials.id',
+        ]);
+
         // Apply ordering
         foreach ($this->orderBy($payload) as $order) {
             $query->orderBy($order['order_by'], $order['sort_order']);
