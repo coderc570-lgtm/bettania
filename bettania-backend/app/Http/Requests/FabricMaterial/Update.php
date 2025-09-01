@@ -20,7 +20,7 @@ class Update extends FormRequest
     {
         $additional_rules = [
             'title' => ['required'],
-            'head_fabric_material_id' => ['required', Rule::exists('fabric_materials', 'id')->whereNull('deleted_at')]
+            'head_fabric_material_id' => ['nullable', Rule::exists('fabric_materials', 'id')->whereNull('deleted_at')]
         ];
 
         return array_merge($this->payloadRules(), $additional_rules);
