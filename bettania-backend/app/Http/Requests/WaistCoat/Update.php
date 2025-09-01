@@ -5,6 +5,7 @@ namespace App\Http\Requests\WaistCoat;
 use App\Traits\PayloadRuleTrait;
 use Illuminate\Foundation\Http\FormRequest;
 use Bouncer;
+use Illuminate\Validation\Rule;
 
 class Update extends FormRequest
 {
