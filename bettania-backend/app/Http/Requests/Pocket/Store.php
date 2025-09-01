@@ -19,11 +19,12 @@ class Store extends FormRequest
     public function rules(): array
     {
         $additional_rules = [
-            'custom_made_id' => ['required', Rule::exists('custom_mades', 'id')->whereNull('deleted_at')],
+            'custom_made_id' => ['nullable', Rule::exists('custom_mades', 'id')->whereNull('deleted_at')],
             'name' => ['required'],
             'description' => ['required'],
             'filepath' => ['required'],
-            'price' => ['nullable']
+            'price' => ['nullable'],
+            'pocket_type_id' => ['required', Rule::exists('pocket_types', 'id')->whereNull('deleted_at')]
         ];
 
         return array_merge($this->payloadRules(), $additional_rules);
