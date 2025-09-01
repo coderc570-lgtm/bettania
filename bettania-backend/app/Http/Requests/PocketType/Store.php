@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Pocket;
+namespace App\Http\Requests\PocketType;
 
 use App\Traits\PayloadRuleTrait;
 use Illuminate\Foundation\Http\FormRequest;
 use Bouncer;
-use Illuminate\Validation\Rule;
 
-class Update extends FormRequest
+class Store extends FormRequest
 {
     use PayloadRuleTrait;
 
@@ -19,12 +18,7 @@ class Update extends FormRequest
     public function rules(): array
     {
         $additional_rules = [
-            'custom_made_id' => ['nullable', Rule::exists('custom_mades', 'id')->whereNull('deleted_at')],
-            'name' => ['required'],
-            'description' => ['required'],
-            'filepath' => ['required'],
-            'price' => ['nullable'],
-            'pocket_type_id' => ['required', Rule::exists('pocket_types', 'id')->whereNull('deleted_at')]
+            'name' => ['required']
         ];
 
         return array_merge($this->payloadRules(), $additional_rules);
