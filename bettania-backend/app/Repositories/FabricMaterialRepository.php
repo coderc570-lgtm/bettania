@@ -59,6 +59,7 @@ class FabricMaterialRepository
 
         $query->groupBy([
             'fabric_materials.id',
+            'fabric_materials_head_fabric_material_id_foreign.id',
         ]);
 
         // Apply ordering
@@ -72,7 +73,7 @@ class FabricMaterialRepository
         // Apply pagination logic
         $pagination = $this->paginate($payload, $total);
         $list = $query->skip($pagination['skip'])->take($pagination['take'])->get();
-        $list->tranform(function ($item) {
+        $list->transform(function ($item) {
             $item->sub_fabric_materials = $item->sub_fabric_materials ? json_decode($item->sub_fabric_materials, true) : null;
             return $item;
         });
