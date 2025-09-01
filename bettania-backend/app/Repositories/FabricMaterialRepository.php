@@ -25,6 +25,7 @@ class FabricMaterialRepository
         $tableName = $this->model->getTable();
         $query = $this->model::query();
         $ability = Str::plural(str_replace('_', '-', Str::snake($tableName)));
+        $show_only_heads = $payload['show_only_heads'] ?? false;
 
         // Get relations of the current table
         $foreignRelations = $this->getForeignTableRelations($tableName);
@@ -51,6 +52,10 @@ class FabricMaterialRepository
         // Exclude specific IDs if provided
         if ($excludedIds) {
             $query->whereNotIn("{$tableName}.id", $excludedIds);
+        }
+
+        if ($show_only_heads) {
+            $query->whereNull('sub_fabric_materials.head_fabric_material_id');
         }
 
         // Handle search filters

@@ -17,7 +17,9 @@ class Index extends FormRequest
 
     public function rules(): array
     {
-        $additional_rules = [];
+        $additional_rules = [
+            'show_only_heads' => ['nullable', 'boolean'],
+        ];
 
         return array_merge($this->payloadRules(), $additional_rules);
     }
