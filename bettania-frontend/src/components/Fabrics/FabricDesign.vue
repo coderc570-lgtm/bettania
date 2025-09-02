@@ -2,7 +2,7 @@
   <div class="mx-16 mb-4">
     <div class="my-6 flex flex-wrap items-center justify-between gap-4">
       <BaseIconButton
-        label="Add Fabric Design"
+        label="Add Design"
         icon="ri-add-line"
         variant="default"
         aos="fade-up"
@@ -10,7 +10,7 @@
       />
       <SearchBar
         v-model="params.search_global"
-        @search="fetchFabrics"
+        @search="fetchDesign"
       />
     </div>
 
@@ -22,33 +22,33 @@
     <Spinner
       v-if="loading"
       class="col-span-full"
-      label="Loading Fabrics..."
+      label="Loading Design..."
     />
 
     <BaseGrid
       v-else
-      :items="formattedFabricsDesign"
-      label="Fabrics"
-      @edit="editFabric"
-      @delete="deleteFabric"
+      :items="formattedDesign"
+      label="Designs"
+      @edit="editDesign"
+      @delete="deleteDesign"
     />
 
-    <AddFabricModal
+    <AddDesignModal
       :show="showAddModal"
       @update:show="val => showAddModal = val"
-      @saved="fetchFabrics"
+      @saved="fetchDesign"
     />
-    <EditFabricModal
+    <EditDesignModal
       :show="showEditModal"
-      :fabric="selectedFabric"
+      :design="selectedDesign"
       @update:show="val => showEditModal = val"
-      @saved="fetchFabrics"
+      @saved="fetchDesign"
     />
-    <DeleteFabricModal
+    <DeleteDesignModal
       :show="showDeleteModal"
-      :fabric="selectedFabricToDelete"
+      :design="selectedDesignToDelete"
       @update:show="val => showDeleteModal = val"
-      @deleted="fetchFabrics"
+      @deleted="fetchDesign"
     />
   </div>
 </template>
@@ -59,9 +59,9 @@ import SearchBar from "@/components/SearchBar.vue";
 import Pagination from "@/components/Pagination.vue";
 import BaseIconButton from "@/components/Base/BaseIconButton.vue";
 import BaseGrid from "@/components/Base/BaseGrid.vue";
-import AddFabricModal from "@/components/Modal/AddFabricModal.vue";
-import EditFabricModal from "@/components/Modal/EditFabricModal.vue";
-import DeleteFabricModal from "@/components/Modal/DeleteFabricModal.vue";
+import AddDesignModal from "@/components/Modal/Fabric/AddDesignModal.vue";
+import EditDesignModal from "@/components/Modal/Fabric/EditDesignModal.vue";
+import DeleteDesignModal from "@/components/Modal/Fabric/DeleteDesignModal.vue";
 
 export default {
   components: {
@@ -70,18 +70,19 @@ export default {
     Pagination,
     BaseIconButton,
     BaseGrid,
-    AddFabricModal,
-    EditFabricModal,
-    DeleteFabricModal},
+    AddDesignModal,
+    EditDesignModal,
+    DeleteDesignModal
+  },
   data() {
     return {
-      fabrics: [],
+      designs: [],
       loading: false,
       showAddModal: false,
       showEditModal: false,
       showDeleteModal: false,
-      selectedFabric: null,
-      selectedFabricToDelete: null,
+      selectedDesign: null,
+      selectedDesignToDelete: null,
       pagination: {
         current_page: 1,
         last_page: 1,
@@ -103,8 +104,8 @@ export default {
     };
   },
   computed: {
-    formattedFabricsDesign() {
-      return this.fabrics.map(f => ({
+    formattedDesign() {
+      return this.designs.map(f => ({
         id: f.fabric_designs_id,
         image: f.fabric_designs_filepath,
         title: f.fabric_designs_title,
@@ -113,11 +114,11 @@ export default {
     },
   },
   methods: {
-    async fetchFabrics() {
+    async fetchDesign() {
       this.loading = true;
       try {
         const res = await this.$axios.post("/v1/fabric-designs", this.params);
-        this.fabrics = res.data.body || [];
+        this.designs = res.data.body || [];
         this.pagination = res.data.details || { current_page: 1, last_page: 1, total: 0, from: 0, to: 0 };
       } catch (err) {
         console.error(err);
@@ -125,19 +126,19 @@ export default {
         this.loading = false;
       }
     },
-    editFabric(fabric) {
-      this.selectedFabric = fabric;
+    editDesign(design) {
+      this.selectedDesign = design;
       this.showEditModal = true;
     },
-    deleteFabric(fabric) {
-      this.selectedFabricToDelete = fabric;
+    deleteDesign(design) {
+      this.selectedDesignToDelete = design;
       this.showDeleteModal = true;
     },
     changePage(page) {
       this.params.page = page;
-      this.fetchFabrics();
+      this.fetchDesign();
     },
   },
-  mounted() { this.fetchFabrics(); },
+  mounted() { this.fetchDesign(); },
 };
 </script>
