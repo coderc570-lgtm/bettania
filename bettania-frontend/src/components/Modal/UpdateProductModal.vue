@@ -2,9 +2,9 @@
   <div
     v-if="show"
     class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50"
+    data-aos="zoom-in"
   >
     <div class="bg-white rounded-2xl shadow-lg w-full max-w-lg p-6 relative">
-      <!-- Close button -->
       <button
         @click="$emit('cancel')"
         class="absolute top-3 right-3 text-gray-500 hover:text-red-500 text-xl"
@@ -14,7 +14,6 @@
 
       <h2 class="text-2xl font-bold mb-6 text-gray-800">Update Product</h2>
 
-      <!-- Form -->
       <form @submit.prevent="updateProduct">
         <div class="mb-4">
           <label class="block text-gray-700 font-medium mb-1">Title</label>

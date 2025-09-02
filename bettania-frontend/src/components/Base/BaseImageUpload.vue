@@ -1,5 +1,8 @@
 <template>
   <div>
+    <label class="block text-sm font-medium mb-2">
+      {{ formLabel }}
+    </label>
     <div
       @dragover.prevent
       @drop.prevent="handleDrop"
@@ -66,6 +69,10 @@ export default {
     folder: {
       type: String,
       default: "uploads"
+    },
+    formLabel: {
+      type: String,
+      default: "Image"
     }
   },
   data() {

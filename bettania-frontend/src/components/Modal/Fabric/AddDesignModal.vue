@@ -14,32 +14,27 @@
       max-w-2xl p-6
       max-h-[90vh]
       overflow-auto"
+      data-aos="zoom-in"
     >
       <h2 class="text-2xl font-bold mb-4">
-        Add Fabric Design
+        Add Design
       </h2>
 
-      <form @submit.prevent="submitFabric" class="space-y-4">
+      <form @submit.prevent="submitDesign" class="space-y-4">
         <div class="grid grid-cols-1 gap-4">
-          <div>
-            <label class="block text-sm font-medium mb-1">
-              Fabric Design Name
-            </label>
-            <input
-              v-model="newFabric.title"
-              type="text"
-              class="w-full border
-              rounded-md px-3 py-2 text-sm"
-              placeholder="Enter Fabric Name"
-              required
-            />
-          </div>
+          <BaseInput
+            label="Design Name"
+            placeholder="Enter Design Name"
+            v-model="newDesign.title"
+            required
+          />
 
           <BaseImageUpload
-            folder="Fabrics"
-            label="Drag & drop or click to upload Design"
-            loadingMessage="Uploading Fabric Design..."
-            @uploaded="newFabric.filepath = $event.path; newFabric.file = $event.file; newFabric.preview = $event.preview"
+            formLabel="Design Image"
+            folder="Design"
+            label="Drag & drop or click to upload design"
+            loadingMessage="Uploading Design..."
+            @uploaded="newDesign.filepath = $event.path; newDesign.file = $event.file; newDesign.preview = $event.preview"
           />
         </div>
 
@@ -55,15 +50,14 @@
           </button>
           <button
             type="submit"
-            :disabled="loading || !newFabric.filepath"
+            :disabled="loading || !newDesign.filepath"
             class="px-4 py-2
             rounded-md
             bg-deep-plum
             text-white
-            hover:bg-gray-800
-            disabled:opacity-50"
+            hover:bg-l-deep-plum"
           >
-            {{ loading ? "Adding Fabric..." : "Add Fabric Design" }}
+            {{ loading ? "Adding..." : "Add Design" }}
           </button>
         </div>
       </form>
@@ -73,10 +67,13 @@
 
 <script>
 import BaseImageUpload from "@/components/Base/BaseImageUpload.vue";
+import BaseInput from '@/components/Base/BaseInput.vue'
 
 export default {
-  name: "AddFabricModal",
-  components: { BaseImageUpload },
+  components: {
+    BaseImageUpload,
+    BaseInput
+  },
   props: {
     show: {
       type: Boolean,
@@ -85,7 +82,7 @@ export default {
   },
   data() {
     return {
-      newFabric: {
+      newDesign: {
         title: "",
         filepath: "",
         file: null,
@@ -114,15 +111,15 @@ export default {
       try {
         const formData = new FormData();
         formData.append("file", file);
-        formData.append("folder_name", "Fabrics");
+        formData.append("folder_name", "Design");
 
         const res = await this.$axios.post("/v1/uploads/file", formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
 
-        this.newFabric.filepath = res.data.body.file_path;
-        this.newFabric.preview = process.env.VUE_APP_FILE_PATH + res.data.body.file_path;
-        this.newFabric.file = file;
+        this.newDesign.filepath = res.data.body.file_path;
+        this.newDesign.preview = process.env.VUE_APP_FILE_PATH + res.data.body.file_path;
+        this.newDesign.file = file;
       } catch (error) {
         console.error("Upload failed:", error);
         this.$notify({
@@ -135,34 +132,34 @@ export default {
       }
     },
 
-    async submitFabric() {
+    async submitDesign() {
       try {
         const formData = new FormData();
-        formData.append("title", this.newFabric.title);
-        formData.append("filepath", this.newFabric.filepath);
+        formData.append("title", this.newDesign.title);
+        formData.append("filepath", this.newDesign.filepath);
 
         await this.$axios.post("/v1/fabric-designs/store", formData);
 
         this.$notify({
           type: "success",
           title: "Success",
-          text: "Fabric added successfully!",
+          text: "Design added successfully!",
         });
         this.$emit("saved");
         this.resetForm();
         this.closeModal();
       } catch (error) {
-        console.error("Error adding Fabric:", error);
+        console.error("Error adding Design:", error);
         this.$notify({
           type: "error",
           title: "Error",
-          text: "Failed to add Fabric.",
+          text: "Failed to add Design.",
         });
       }
     },
 
     resetForm() {
-      this.newFabric = { title: "", filepath: "", file: null, preview: "" };
+      this.newDesign = { title: "", filepath: "", file: null, preview: "" };
       this.loading = false;
     },
 

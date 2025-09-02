@@ -3,7 +3,7 @@
     v-if="show"
     class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40"
   >
-    <div class="bg-white rounded-xl shadow-lg w-full max-w-md p-6">
+    <div class="bg-white rounded-xl shadow-lg w-full max-w-md p-6" data-aos="zoom-in">
       <h2 class="text-xl font-bold mb-4">Delete Product</h2>
       <p class="text-gray-700 mb-6">
         Are you sure you want to delete

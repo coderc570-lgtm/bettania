@@ -7,14 +7,14 @@
     bg-black
     bg-opacity-40"
   >
-    <div class="bg-white rounded-xl shadow-lg w-full max-w-sm p-6">
+    <div class="bg-white rounded-xl shadow-lg w-full max-w-sm p-6" data-aos="zoom-in">
       <h2 class="text-xl font-bold mb-4 text-red-600">
-        Delete Fabric
+        Delete Season
       </h2>
       <p class="text-gray-700 mb-6">
         Are you sure you want to delete
         <span class="font-semibold">
-          {{ fabric.title }}
+          {{ season.title }}
         </span>?
       </p>
 
@@ -40,7 +40,7 @@
           hover:bg-red-700"
           :disabled="loading"
         >
-          {{ loading ? "Deleting..." : "Delete" }}
+          {{ loading ? "Deleting..." : "Delete Season" }}
         </button>
       </div>
     </div>
@@ -49,13 +49,12 @@
 
 <script>
 export default {
-  name: "DeleteFabricModal",
   props: {
     show: {
       type: Boolean,
       required: true
     },
-    fabric: {
+    season: {
       type: Object,
       default: () => ({})
     },
@@ -73,12 +72,12 @@ export default {
       try {
         this.loading = true;
         await this.$axios.delete(
-          `/v1/fabric-designs/delete/${this.fabric.id}`
+          `/v1/fabric-seasons/delete/${this.season.id}`
         );
         this.$notify({
           type: "success",
           title: "Deleted",
-          text: "Fabric deleted successfully!",
+          text: "Season deleted successfully!",
         });
         this.$emit("deleted");
         this.closeModal();
@@ -87,7 +86,7 @@ export default {
         this.$notify({
           type: "error",
           title: "Error",
-          text: "Failed to delete fabric.",
+          text: "Failed to delete season.",
         });
       } finally {
         this.loading = false;

@@ -3,27 +3,21 @@
     v-if="show"
     class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40"
   >
-    <div class="bg-white rounded-xl shadow-lg w-full max-w-2xl p-6 max-h-[90vh] overflow-auto">
+    <div class="bg-white rounded-xl shadow-lg w-full max-w-2xl p-6 max-h-[90vh] overflow-auto" data-aos="zoom-in">
       <h2 class="text-2xl font-bold mb-4">
-        Edit Fabric Design
+        Edit Design
       </h2>
 
-      <form @submit.prevent="updateFabric" class="space-y-4">
-        <div>
-          <label class="block text-sm font-medium mb-1">
-            Fabric Design Name
-        </label>
-          <input
-            v-model="form.title"
-            type="text"
-            class="w-full border rounded-md px-3 py-2 text-sm"
-            required
-          />
-        </div>
-
+      <form @submit.prevent="updateDesign" class="space-y-4">
+        <BaseInput
+          label="Design Name"
+          placeholder="Enter Design Name"
+          v-model="form.title"
+          required
+        />
         <div>
           <label class="block text-sm font-medium mb-2">
-            Fabric Image
+            Design Image
           </label>
 
           <div
@@ -46,7 +40,7 @@
             />
             <div class="text-center" @click="$refs.fileInput.click()">
               <p class="text-sm text-gray-500">
-                Drag & drop or click to upload
+                Drag & drop or click to upload design
               </p>
             </div>
           </div>
@@ -76,13 +70,13 @@
           <button
             type="submit"
             class="px-4 py-2
-            rounded-md bg-black
+            rounded-md
+            bg-deep-plum
             text-white
-            hover:bg-gray-800
-            disabled:opacity-50"
+            hover:bg-l-deep-plum"
             :disabled="loading"
           >
-            {{ loading ? "Updating..." : "Update Fabric" }}
+            {{ loading ? "Updating..." : "Update Design" }}
           </button>
         </div>
       </form>
@@ -92,12 +86,16 @@
 
 <script>
 import Loading from "@/components/Loading.vue";
+import BaseInput from '@/components/Base/BaseInput.vue'
 
 export default {
-  components: { Loading },
+  components: {
+    Loading,
+    BaseInput
+  },
   props: {
     show: Boolean,
-    fabric: Object
+    design: Object
   },
   data() {
     return {
@@ -111,7 +109,7 @@ export default {
     };
   },
   watch: {
-    fabric: {
+    design: {
       immediate: true,
       handler(f) {
         if (!f) return;
@@ -136,7 +134,7 @@ export default {
       try {
         const formData = new FormData();
         formData.append("file", file);
-        formData.append("folder_name", "Fabrics");
+        formData.append("folder_name", "Design");
         const res = await this.$axios.post("/v1/uploads/file", formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
@@ -154,7 +152,7 @@ export default {
         this.loading = false;
       }
     },
-    async updateFabric() {
+    async updateDesign() {
       if (!this.form.title || !this.form.filepath) {
         return this.$notify({
           type: "error",
@@ -164,14 +162,14 @@ export default {
       }
       try {
         this.loading = true;
-        await this.$axios.put(`/v1/fabric-designs/${this.fabric.id}`, {
+        await this.$axios.put(`/v1/fabric-designs/${this.design.id}`, {
           title: this.form.title,
           filepath: this.form.filepath,
         });
         this.$notify({
           type: "success",
           title: "Updated",
-          text: "Fabric updated successfully!"
+          text: "Design updated successfully!"
         });
         this.$emit("saved");
         this.closeModal();
@@ -180,7 +178,7 @@ export default {
         this.$notify({
           type: "error",
           title: "Error",
-          text: "Failed to update fabric."
+          text: "Failed to update design."
         });
       } finally {
         this.loading = false;

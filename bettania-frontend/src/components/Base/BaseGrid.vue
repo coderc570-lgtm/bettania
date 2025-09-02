@@ -42,8 +42,10 @@
 
     <div
       v-if="items.length === 0"
-      class="col-span-full text-center text-gray-500 py-8"
+      class="bg-gray-200 col-span-full text-center text-black py-8"
       data-aos="fade-up"
+      data-aos-delay="100"
+      data-aos-duration="600"
     >
       <p>No {{ label }} found</p>
     </div>
