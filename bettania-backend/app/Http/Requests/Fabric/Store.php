@@ -24,6 +24,8 @@ class Store extends FormRequest
             'filepath' => ['nullable', 'string'],
             'color' => ['required'],
             'color_code' => ['nullable'],
+            'fabric_code' => ['nullable'],
+            'composition' => ['nullable'],
             'fabric_design_id' => ['nullable', Rule::exists('fabric_designs', 'id')->whereNull('deleted_at')],
             'fabric_season_id' => ['nullable', Rule::exists('fabric_seasons', 'id')->whereNull('deleted_at')],
             'fabric_material_id' => ['nullable', Rule::exists('fabric_materials', 'id')->whereNull('deleted_at')],

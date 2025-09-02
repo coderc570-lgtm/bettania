@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label :for="id" class="block text-sm font-medium text-gray-700">
+    <label :for="id" class="block text-sm font-medium">
       {{ label }}
     </label>
     <input
@@ -10,11 +10,9 @@
       :placeholder="placeholder"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
-      class="mt-1 block w-full
-      border border-gray-300
-      rounded-md shadow-sm
-      px-4 py-2 focus:ring-black
-      focus:border-black"
+      class="w-full border
+      rounded-md px-3 py-2
+      text-sm"
       :required="required"
     />
   </div>

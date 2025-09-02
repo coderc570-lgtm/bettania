@@ -21,6 +21,7 @@ class Store extends FormRequest
             'name' => ['required'],
             'price' => ['required', 'numeric'],
             'filepath' => ['nullable', 'string'],
+            'description' => ['nullable']
         ];
 
         return array_merge($this->payloadRules(), $additional_rules);
