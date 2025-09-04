@@ -149,12 +149,11 @@
 </template>
 
 <script>
-import BaseImageUpload from "@/components/Base/BaseImageUpload.vue";
 import BaseInput from "@/components/Base/BaseInput.vue";
 import BaseSelect from "@/components/Base/BaseSelect.vue";
 
 export default {
-  components: { BaseImageUpload, BaseInput, BaseSelect },
+  components: { BaseInput, BaseSelect },
   props: {
     show: { type: Boolean, required: true },
     fabric: { type: Object, required: true }, // incoming fabric data
