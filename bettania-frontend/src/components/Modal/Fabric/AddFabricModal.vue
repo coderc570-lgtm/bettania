@@ -56,7 +56,7 @@
 
           <BaseSelect
             label="Fabric Design"
-            v-model="newFabric.fabric_designs_id"
+            v-model="newFabric.fabric_design_id"
             :options="fabricDesignOptions"
             placeholder="-- Select Fabric Design --"
             required
@@ -64,7 +64,7 @@
 
           <BaseSelect
             label="Fabric Season"
-            v-model="newFabric.fabric_seasons_id"
+            v-model="newFabric.fabric_season_id"
             :options="fabricSeasonOptions"
             placeholder="-- Select Fabric Season --"
             required
@@ -72,7 +72,7 @@
 
           <BaseSelect
             label="Fabric Material"
-            v-model="newFabric.fabric_materials_id"
+            v-model="newFabric.fabric_material_id"
             :options="fabricMaterialOptions"
             placeholder="-- Select Fabric Material --"
             required
@@ -80,7 +80,7 @@
 
           <BaseSelect
             label="Fabric Mill"
-            v-model="newFabric.fabric_mills_id"
+            v-model="newFabric.fabric_mill_id"
             :options="fabricMillOptions"
             placeholder="-- Select Fabric Mill --"
             required
@@ -147,10 +147,10 @@ export default {
         color_code: "",
         fabric_code: "",
         composition: "",
-        fabric_designs_id: null,
-        fabric_seasons_id: null,
-        fabric_materials_id: null,
-        fabric_mills_id: null,
+        fabric_design_id: null,
+        fabric_season_id: null,
+        fabric_material_id: null,
+        fabric_mill_id: null,
       },
       fabricDesignOptions: [],
       fabricSeasonOptions: [],
@@ -256,10 +256,10 @@ export default {
         formData.append("color_code", this.newFabric.color_code);
         formData.append("fabric_code", this.newFabric.fabric_code);
         formData.append("composition", this.newFabric.composition);
-        formData.append("fabric_designs_id", this.newFabric.fabric_designs_id);
-        formData.append("fabric_seasons_id", this.newFabric.fabric_seasons_id);
-        formData.append("fabric_materials_id", this.newFabric.fabric_materials_id);
-        formData.append("fabric_mills_id", this.newFabric.fabric_mills_id);
+        formData.append("fabric_design_id", this.newFabric.fabric_design_id);
+        formData.append("fabric_season_id", this.newFabric.fabric_season_id);
+        formData.append("fabric_material_id", this.newFabric.fabric_material_id);
+        formData.append("fabric_mill_id", this.newFabric.fabric_mill_id);
 
 
         await this.$axios.post("/v1/fabrics/store", formData);
