@@ -56,7 +56,7 @@ class FabricMaterialRepository
         }
 
         if ($show_only_heads) {
-            $query->whereNull('sub_fabric_materials.head_fabric_material_id');
+            $query->whereNull('fabric_materials.head_fabric_material_id');
         }
 
         // Handle search filters
