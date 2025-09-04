@@ -24,6 +24,7 @@ import Lapel from '@/pages/Admin/lapel.vue'
 import Button from '@/pages/Admin/button.vue'
 import Trouser from '@/pages/Admin/trouser.vue'
 import InternalLining from '@/pages/Admin/internal-lining.vue'
+import Pocket from '@/pages/Admin/pocket.vue'
 
 const routes = [
   {
@@ -159,6 +160,14 @@ const routes = [
     name: 'internal-lining',
     meta: {
       title: 'Bettania - InternalLinings'
+    }
+  },
+  {
+    path: '/admin/pocket',
+    component: Pocket,
+    name: 'pocket',
+    meta: {
+      title: 'Bettania - Pockets'
     }
   },
   {

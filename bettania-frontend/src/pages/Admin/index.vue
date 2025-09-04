@@ -54,7 +54,7 @@ export default {
           desc: 'Manage all products',
         },
         {
-          title: 'Custom Made',
+          title: 'Custom',
           icon: 'ri-suitcase-line',
           route: '/admin/custom-made',
           desc: 'Manage custom tailored suits and components',
@@ -90,17 +90,18 @@ export default {
           desc: 'Edit linings',
         },
         {
-          title: 'Successfully Ordered',
-          icon: 'ri-check-double-line',
-          route: '/admin/orders/success',
+          title: 'Pocket',
+          icon: 'ri-wallet-line',
+          route: '/admin/pocket',
           desc: 'View completed orders',
         },
         {
-          title: 'Users',
-          icon: 'ri-user-3-line',
+          title: 'Closure',
+          icon: 'ri-function-line',
           route: '/admin/users',
           desc: 'Manage users',
-        },
+        }
+
       ],
     }
   },
