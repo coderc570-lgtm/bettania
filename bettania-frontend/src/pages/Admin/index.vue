@@ -56,7 +56,7 @@ export default {
         {
           title: 'Custom Made',
           icon: 'ri-suitcase-line',
-          route: '/admin/custom-suits',
+          route: '/admin/custom-made',
           desc: 'Manage custom tailored suits and components',
         },
         {

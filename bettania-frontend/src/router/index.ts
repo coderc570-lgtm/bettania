@@ -19,6 +19,7 @@ import Categories from '@/pages/Admin/categories.vue'
 import User from '@/pages/Admin/user.vue'
 import NewCustomSuit from '@/components/NewCustomSuit.vue'
 import Fabric from '@/pages/Admin/fabric.vue'
+import CustomMade from '@/pages/Admin/custom-made.vue'
 import Lapel from '@/pages/Admin/lapel.vue'
 import Button from '@/pages/Admin/button.vue'
 import Trouser from '@/pages/Admin/trouser.vue'
@@ -110,12 +111,22 @@ const routes = [
       title: 'Bettania - Users'
     }
   },
+
+  // FABRICS
   {
     path: '/admin/fabric',
     component: Fabric,
     name: 'fabric',
     meta: {
       title: 'Bettania - Fabrics'
+    }
+  },
+  {
+    path: '/admin/custom-made',
+    component: CustomMade,
+    name: 'custom-made',
+    meta: {
+      title: 'Bettania - Custom Made'
     }
   },
   {

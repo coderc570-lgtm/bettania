@@ -4,7 +4,7 @@
       {{ label }}
     </label>
     <select
-      :model-value="modelValue"
+      :value="modelValue"
       @change="$emit('update:modelValue', $event.target.value)"
       class="w-full border
       rounded-lg px-3 py-2
