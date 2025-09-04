@@ -19,6 +19,10 @@ import Categories from '@/pages/Admin/categories.vue'
 import User from '@/pages/Admin/user.vue'
 import NewCustomSuit from '@/components/NewCustomSuit.vue'
 import Fabric from '@/pages/Admin/fabric.vue'
+import Lapel from '@/pages/Admin/lapel.vue'
+import Button from '@/pages/Admin/button.vue'
+import Trouser from '@/pages/Admin/trouser.vue'
+import InternalLining from '@/pages/Admin/internal-lining.vue'
 
 const routes = [
   {
@@ -112,6 +116,38 @@ const routes = [
     name: 'fabric',
     meta: {
       title: 'Bettania - Fabrics'
+    }
+  },
+  {
+    path: '/admin/lapel',
+    component: Lapel,
+    name: 'lapel',
+    meta: {
+      title: 'Bettania - Lapels'
+    }
+  },
+  {
+    path: '/admin/button',
+    component: Button,
+    name: 'button',
+    meta: {
+      title: 'Bettania - Buttons'
+    }
+  },
+  {
+    path: '/admin/trouser',
+    component: Trouser,
+    name: 'trouser',
+    meta: {
+      title: 'Bettania - Trousers'
+    }
+  },
+  {
+    path: '/admin/internal-lining',
+    component: InternalLining,
+    name: 'internal-lining',
+    meta: {
+      title: 'Bettania - InternalLinings'
     }
   },
   {
