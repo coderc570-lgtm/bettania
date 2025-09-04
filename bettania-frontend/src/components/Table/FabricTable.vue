@@ -41,13 +41,15 @@
       gap-6"
     >
       <div
-        v-for="fabric in fabrics"
-        :key="fabric.fabrics_id"
+        v-for="(fabric, index) in fabrics"
+        :key="fabric.id || index"
         class="bg-white border
         rounded-lg shadow
         hover:shadow-lg
         transition
         overflow-hidden"
+        data-aos="fade-up"
+        :data-aos-delay="index * 100"
       >
         <img
           v-if="fabric.fabrics_filepath"
@@ -63,7 +65,7 @@
             Type:</span> {{ fabric.fabrics_name || 'N/A' }}
           </p>
           <p class="text-gray-600 mb-1"><span class="font-semibold">
-            Color:</span> {{ fabric.fabrics_name || 'N/A' }}
+            Color:</span> {{ fabric.fabrics_color || 'N/A' }}
           </p>
           <p class="text-gray-600"><span class="font-semibold">
             Price:</span> {{ fabric.fabrics_price ? '$' + fabric.fabrics_price : 'N/A' }}
@@ -71,7 +73,7 @@
         </div>
 
         <div class="p-4 flex justify-end gap-2">
-          <button>
+          <button @click="updateDesign(fabric)">
             <i class="ri-edit-2-line hover:text-deep-plum"></i>
           </button>
           <button @click="deleteDesign(fabric)">
@@ -83,7 +85,10 @@
 
     <p
       v-if="!loading && !fabrics.length"
-      class="text-center text-gray-500 mt-10"
+      class="bg-gray-200 col-span-full text-center text-black py-8"
+      data-aos="fade-up"
+      data-aos-delay="100"
+      data-aos-duration="600"
     >
       No fabrics found.
     </p>
@@ -91,6 +96,13 @@
     <AddFabricModal
       :show="showAddModal"
       @update:show="val => showAddModal = val"
+      @saved="fetchFabric"
+    />
+
+    <EditFabricModal 
+      :show="showEditModal" 
+      :fabric="selectedFabric" 
+      @update:show="val => showEditModal = val"
       @saved="fetchFabric"
     />
 
@@ -109,21 +121,25 @@ import SearchBar from "@/components/SearchBar.vue";
 import Pagination from "@/components/Pagination.vue";
 import BaseIconButton from "@/components/Base/BaseIconButton.vue";
 import AddFabricModal from "@/components/Modal/Fabric/AddFabricModal.vue";
+import EditFabricModal from "@/components/Modal/Fabric/EditFabricModal.vue";
 import DeleteFabricModal from "@/components/Modal/Fabric/DeleteFabricsModal.vue";
 
 export default {
   components: {
-    BaseIconButton,
-    SearchBar,
-    AddFabricModal,
-    DeleteFabricModal,
     Spinner,
+    SearchBar,
     Pagination,
+    AddFabricModal,
+    BaseIconButton,
+    EditFabricModal,
+    DeleteFabricModal,
   },
   data() {
     return {
       showAddModal: false,
+      showEditModal: false,
       showDeleteModal: false,
+      selectedFabric: null,
       selectedFabricToDelete: null,
       fabrics: [],
       loading: false,
@@ -161,6 +177,10 @@ export default {
     },
     filePath(path) {
       return `${process.env.VUE_APP_FILE_PATH}${path}`;
+    },
+    updateDesign(fabrics) {
+      this.selectedFabric = fabrics;
+      this.showEditModal = true;
     },
     deleteDesign(fabrics) {
       this.selectedFabricToDelete = fabrics;

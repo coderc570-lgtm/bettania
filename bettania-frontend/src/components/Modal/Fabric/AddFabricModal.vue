@@ -36,14 +36,14 @@
           <BaseInput
             label="Color Code"
             placeholder="Enter Color Code"
-            v-model="newFabric.colorCode"
+            v-model="newFabric.color_code"
             required
           />
 
           <BaseInput
             label="Fabric Code"
             placeholder="Enter Fabric Code"
-            v-model="newFabric.fabricCode"
+            v-model="newFabric.fabric_code"
             required
           />
 
@@ -56,7 +56,7 @@
 
           <BaseSelect
             label="Fabric Design"
-            v-model="newFabric.fabricDesign"
+            v-model="newFabric.fabric_designs_id"
             :options="fabricDesignOptions"
             placeholder="-- Select Fabric Design --"
             required
@@ -64,7 +64,7 @@
 
           <BaseSelect
             label="Fabric Season"
-            v-model="newFabric.fabricSeason"
+            v-model="newFabric.fabric_seasons_id"
             :options="fabricSeasonOptions"
             placeholder="-- Select Fabric Season --"
             required
@@ -72,7 +72,7 @@
 
           <BaseSelect
             label="Fabric Material"
-            v-model="newFabric.fabricMaterial"
+            v-model="newFabric.fabric_materials_id"
             :options="fabricMaterialOptions"
             placeholder="-- Select Fabric Material --"
             required
@@ -80,7 +80,7 @@
 
           <BaseSelect
             label="Fabric Mill"
-            v-model="newFabric.fabricMill"
+            v-model="newFabric.fabric_mills_id"
             :options="fabricMillOptions"
             placeholder="-- Select Fabric Mill --"
             required
@@ -144,13 +144,13 @@ export default {
         file: null,
         preview: "",
         color: "",
-        colorCode: "",
-        fabricCode: "",
+        color_code: "",
+        fabric_code: "",
         composition: "",
-        fabricDesign: null,
-        fabricSeason: null,
-        fabricMaterial: null,
-        fabricMill: null,
+        fabric_designs_id: null,
+        fabric_seasons_id: null,
+        fabric_materials_id: null,
+        fabric_mills_id: null,
       },
       fabricDesignOptions: [],
       fabricSeasonOptions: [],
@@ -248,9 +248,20 @@ export default {
       try {
         this.loading = true;
         const formData = new FormData();
-        Object.keys(this.newFabric).forEach((key) => {
-          formData.append(key, this.newFabric[key]);
-        });
+        formData.append("name", this.newFabric.name);
+        formData.append("price", this.newFabric.price);
+        formData.append("price", this.newFabric.price);
+        formData.append("filepath", this.newFabric.filepath);
+        formData.append("color", this.newFabric.color);
+        formData.append("color_code", this.newFabric.color_code);
+        formData.append("fabric_code", this.newFabric.fabric_code);
+        formData.append("composition", this.newFabric.composition);
+        formData.append("fabric_designs_id", this.newFabric.fabric_designs_id);
+        formData.append("fabric_seasons_id", this.newFabric.fabric_seasons_id);
+        formData.append("fabric_materials_id", this.newFabric.fabric_materials_id);
+        formData.append("fabric_mills_id", this.newFabric.fabric_mills_id);
+
+
         await this.$axios.post("/v1/fabrics/store", formData);
         this.$notify({ type: "success", title: "Success", text: "Fabric added successfully!" });
         this.$emit("saved");

@@ -17,11 +17,11 @@
 <script>
 import BaseHeaderNavigation from "@/components/Base/BaseHeaderNavigation.vue";
 import TabSlider from "@/components/TabSlider.vue";
-import Fabric from "@/components/Fabrics/Fabric.vue";
-import FabricDesign from "@/components/Fabrics/FabricDesign.vue";
-import FabricSeason from "@/components/Fabrics/FabricSeason.vue";
-import FabricMaterial from "@/components/Fabrics/FabricMaterial.vue";
-import FabricMill from "@/components/Fabrics/FabricMill.vue";
+import Fabric from "@/components/Table/FabricTable.vue";
+import FabricDesign from "@/components/Table/FabricDesignTable.vue";
+import FabricSeason from "@/components/Table/FabricSeasonTable.vue";
+import FabricMaterial from "@/components/Table/FabricMaterialTable.vue";
+import FabricMill from "@/components/Table/FabricMillTable.vue";
 
 export default {
   components: {
