@@ -33,7 +33,7 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-  ],
+, "src/components/Modal/Pocket/Edit"  ],
   "exclude": [
     "node_modules"
   ]
